@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c121d5ff179a7374eac9168abc4afc46, type: 3}
-  m_Name: Caixa
+  m_Name: Picho no trem
   m_EditorClassIdentifier: Assembly-CSharp::ReferenciaData
-  idUnico: Referencia01
-  nomeExibicao: Referencia
-  descricaoDetalhada: Sistema
-  iconeUI: {fileID: 5497296158822761968, guid: 6f2d705dd14382e48a46765f2e9cafff, type: 3}
+  idUnico: 00
+  nomeExibicao: Picho no trem
+  descricaoDetalhada: 
+  iconeUI: {fileID: 2037196685482824029, guid: d43dc37a6d2a43841adf59ea35c8efcd, type: 3}
