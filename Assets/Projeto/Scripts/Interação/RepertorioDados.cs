@@ -30,7 +30,6 @@ public class RepertorioDados : MonoBehaviour
         // HashSet.Add retorna false se o item já existia na lista (evita duplicatas)
         if (referenciasColetadas.Add(id))
         {
-            Debug.Log($"[Repertório] Nova referência salva: {id}");
             return true;
         }
         return false;

@@ -17,14 +17,16 @@ public class ItemInteragivel : MonoBehaviour, IInteractable
 
     public void Interagir()
     {
-        if (dadosDaReferencia == null) return;
+        if (dadosDaReferencia == null)
+        {
+            return;
+        }
 
         if (RepertorioDados.Instancia != null)
         {
             RepertorioDados.Instancia.AdicionarReferencia(dadosDaReferencia.idUnico);
         }
 
-        // Dispara a interface
         if (GerenciadorInterface.Instancia != null)
         {
             GerenciadorInterface.Instancia.MostrarNotificacao(dadosDaReferencia.nomeExibicao, dadosDaReferencia.iconeUI);
