@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
         controls.Player.Move.canceled += ctx => moveInput = Vector2.zero;
 
         // Evento de movimento do mouse
-        controls.Player.Look.performed += ctx => mousePos = mainCam.ScreenToWorldPoint(ctx.ReadValue<Vector2>());
+        controls.Player.Look.performed += ctx => mousePos = ctx.ReadValue<Vector2>();
 
         // Quando apertar o botão de interagir, chama a função "TentarInteragir"
         controls.Player.Interact.performed += ctx => TentarInteragir();
@@ -72,7 +72,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void ProcessarRotacao()
     {
-        Vector2 direcaoOlhar = mousePos - rb.position;
+        Vector2 mouseWorldPos = mainCam.ScreenToWorldPoint(mousePos);
+
+        Vector2 direcaoOlhar = mouseWorldPos - rb.position;
         float anguloGiro = Mathf.Atan2(direcaoOlhar.y, direcaoOlhar.x) * Mathf.Rad2Deg - 90f;
 
         rb.rotation = anguloGiro;
