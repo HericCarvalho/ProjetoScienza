@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
 
     #region VARIAVEIS: CANVAS
     [Header("Efeitos Visuais de UI")] [Tooltip("Arraste o objeto do Canvas que possui o script AparecerUI aqui.")]
-    public AparecerUI scriptFadeUI;
+    public GerenciadorInterface scriptFadeUI;
     #endregion
 
     #region VARIAVEIS: REFERÊNCIAS INTERNAS
@@ -44,10 +44,11 @@ public class PlayerMovement : MonoBehaviour
         controls.Player.Move.canceled += ctx => moveInput = Vector2.zero;
 
         // Evento de movimento do mouse
-        controls.Player.Look.performed += ctx => mousePos = mainCam.ScreenToWorldPoint(ctx.ReadValue<Vector2>());
+        controls.Player.Look.performed += ctx => mousePos = ctx.ReadValue<Vector2>();
 
         // Quando apertar o botão de interagir, chama a função "TentarInteragir"
         controls.Player.Interact.performed += ctx => TentarInteragir();
+
     }
     void OnDisable()
     {
@@ -71,7 +72,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void ProcessarRotacao()
     {
-        Vector2 direcaoOlhar = mousePos - rb.position;
+        Vector2 mouseWorldPos = mainCam.ScreenToWorldPoint(mousePos);
+
+        Vector2 direcaoOlhar = mouseWorldPos - rb.position;
         float anguloGiro = Mathf.Atan2(direcaoOlhar.y, direcaoOlhar.x) * Mathf.Rad2Deg - 90f;
 
         rb.rotation = anguloGiro;
@@ -83,18 +86,13 @@ public class PlayerMovement : MonoBehaviour
     {
         if (objetoInteragivelAtual != null)
         {
-            // guardamos a referência do item em uma variável local temporária
             IInteractable itemParaInteragir = objetoInteragivelAtual;
-
             objetoInteragivelAtual = null;
 
-            // forçamos o Canvas a sumir na hora, sem depender da física
-            if (scriptFadeUI != null)
-            {
-                scriptFadeUI.AtivarFadeOut();
-            }
+            // Esconde o "E" da tela imediatamente assim que o jogador interagir
+            if (GerenciadorInterface.Instancia != null)
+                GerenciadorInterface.Instancia.EsconderBotaoE();
 
-            // por último, chamamos a interação que vai destruir o item
             itemParaInteragir.Interagir();
         }
     }
@@ -103,35 +101,27 @@ public class PlayerMovement : MonoBehaviour
     #region DETECCAO POR PROXIMIDADE
     void OnTriggerEnter2D(Collider2D collision)
     {
-        // Verifica se o objeto que interagimos tem o componente de Interação
         IInteractable interactable = collision.GetComponent<IInteractable>();
-
         if (interactable != null)
         {
             objetoInteragivelAtual = interactable;
-            Debug.Log("Perto de um objeto interagível. Aperte o botão de interação!");
 
-            //Ativa o Fade In do "E" na tela
-            if (scriptFadeUI != null)
-            {
-                scriptFadeUI.AtivarFadeIn();
-            }
+            // Faz o "E" aparecer na tela via Fade quando o player chega perto
+            if (GerenciadorInterface.Instancia != null)
+                GerenciadorInterface.Instancia.MostrarBotaoE();
         }
     }
+
     void OnTriggerExit2D(Collider2D collision)
     {
         IInteractable interactable = collision.GetComponent<IInteractable>();
-
         if (interactable == objetoInteragivelAtual)
         {
             objetoInteragivelAtual = null;
-            Debug.Log("Se afastou do objeto.");
 
-            // Ativa o Fade Out do "E" para sumir da tela
-            if (scriptFadeUI != null)
-            {
-                scriptFadeUI.AtivarFadeOut();
-            }
+            // Faz o "E" sumir da tela via Fade se o player passar direto e se afastar
+            if (GerenciadorInterface.Instancia != null)
+                GerenciadorInterface.Instancia.EsconderBotaoE();
         }
     }
     #endregion
