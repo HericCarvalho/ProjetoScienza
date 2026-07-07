@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c121d5ff179a7374eac9168abc4afc46, type: 3}
   m_Name: Caixa
   m_EditorClassIdentifier: Assembly-CSharp::ReferenciaData
-  idUnico: Caixa
-  nomeExibicao: Caixa
-  descricaoDetalhada: Caixa
-  iconeUI: {fileID: -1428079781, guid: 069a00c4a21d8654bbe27600f3ba7103, type: 3}
+  idUnico: Referencia01
+  nomeExibicao: Referencia
+  descricaoDetalhada: Sistema
+  iconeUI: {fileID: 5497296158822761968, guid: 6f2d705dd14382e48a46765f2e9cafff, type: 3}

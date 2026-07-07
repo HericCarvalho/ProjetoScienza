@@ -53,7 +53,6 @@ public class GerenciadorInterface : MonoBehaviour
         if (controls != null)
         {
             controls.Enable();
-            // O R abre a mochila
             controls.Player.OpenRepertorio.performed += OnOpenRepertorioPerformed;
         }
     }
@@ -95,22 +94,32 @@ public class GerenciadorInterface : MonoBehaviour
     }
     private void AtualizarVisualDoRepertorio()
     {
+        // Limpa os slots antigos
         foreach (Transform child in containerItens) { Destroy(child.gameObject); }
 
+        // Vasculha a lista global de itens
         foreach (ReferenciaData refData in todasAsReferenciasDoJogo)
         {
             if (refData == null) continue;
 
+            // Checa se o jogador possui o item
             if (RepertorioDados.Instancia != null && RepertorioDados.Instancia.JaPossuiReferencia(refData.idUnico))
             {
-                GameObject slot = Instantiate(prefabSlotItem, containerItens);
+                // Cria o slot na tela
+                GameObject slotObj = Instantiate(prefabSlotItem, containerItens);
 
-                Image icone = slot.transform.Find("Icone").GetComponent<Image>();
-                TextMeshProUGUI nome = slot.transform.Find("Nome").GetComponent<TextMeshProUGUI>();
+                // Pega o componente do nosso novo script do Slot
+                SlotMochila slotScript = slotObj.GetComponent<SlotMochila>();
 
-                icone.sprite = refData.iconeUI;
-                nome.text = refData.nomeExibicao;
-                icone.color = Color.white;
+                if (slotScript != null && slotScript.imagemDoIcone != null)
+                {
+                    // Alimenta os dados direto nos campos que você arrastou no Inspector
+                    slotScript.imagemDoIcone.sprite = refData.iconeUI;
+                    slotScript.textoDoNome.text = refData.nomeExibicao;
+
+                    // Força a cor para branco com Alpha 1 para garantir que não fique transparente
+                    slotScript.imagemDoIcone.color = Color.white;
+                }
             }
         }
     }
