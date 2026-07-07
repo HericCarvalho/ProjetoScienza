@@ -2,19 +2,34 @@ using UnityEngine;
 
 public class ItemInteragivelExemplo : MonoBehaviour, IInteractable
 {
-    [Header("Configurações do Objeto")]
-    public string nomeDoItem = "Arma do Chão";
+    [Header("Configuracoes do Objeto")]
+    public string nomeDoItem = "Arma do Chao";
+
+    private Collider2D meuCollider;
 
     void Awake()
     {
         // Garante que o collider seja um Trigger
-        GetComponent<Collider2D>().isTrigger = true;
+        meuCollider = GetComponent<Collider2D>();
     }
 
     public void Interagir()
     {
-        Debug.Log("Você interagiu com: " + nomeDoItem);
+        Debug.Log("Voce interagiu com: " + nomeDoItem);
 
-        Destroy(gameObject);
+        if (AparecerUI.Instancia != null)
+        {
+            AparecerUI.Instancia.MostrarNotificacao(nomeDoItem);
+        }
+
+        DesativarInteracao();
+    }
+    private void DesativarInteracao()
+    {
+        // Desativa o colisor
+        
+        meuCollider.enabled = false;
+        this.enabled = false;
+        Debug.Log($"O script de interação de '{gameObject.name}' foi desativado.");
     }
 }

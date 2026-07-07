@@ -94,7 +94,7 @@ public class PlayerMovement : MonoBehaviour
                 scriptFadeUI.AtivarFadeOut();
             }
 
-            // por último, chamamos a interação que vai destruir o item
+            // chamamos a interação que vai destruir o item
             itemParaInteragir.Interagir();
         }
     }
