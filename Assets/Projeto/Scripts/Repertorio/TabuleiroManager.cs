@@ -6,8 +6,8 @@ public class TabuleiroManager : MonoBehaviour
     public static TabuleiroManager Instancia { get; private set; }
 
     [Header("Configuracoes do Grid Triangular")]
-    public int tamanhoBaseTopo = 6; // Define o número de círculos que a linha mais larga
-    public float tamanhoCirculo = 0.6f; // Define o diâmetro/tamanho que cada círculo terá no mundo do jogo
+    public int tamanhoBaseTopo = 6;
+    public float tamanhoCirculo = 0.6f;
 
     [Header("Prefabs")]
     public GameObject prefabNoGrid;
@@ -50,11 +50,14 @@ public class TabuleiroManager : MonoBehaviour
                 NoGrid noScript = novoNoObj.GetComponent<NoGrid>();
                 noScript.x = x;
                 noScript.y = y;
+                noScript.simboloAtual = TipoSimbolo.Nenhum;
+                noScript.estaOcupado = false;
 
-                // Se o seu tamanhoBaseTopo for 6, a ultima linha e a 5.
+                // Define explicitamente o ponto de partida do jogo na ponta de baixo
                 if (y == tamanhoBaseTopo - 1 && x == 0)
                 {
                     noScript.simboloAtual = TipoSimbolo.Triangulo;
+                    noScript.estaOcupado = true;
                 }
 
                 dicionarioGrid.Add(new Vector2Int(x, y), noScript);
@@ -79,64 +82,66 @@ public class TabuleiroManager : MonoBehaviour
         return noMaisProximo;
     }
 
-    // Valida se a peca pode ser colocada de acordo com as regras de adjacencia e simbolos
     public bool TentarPosicionarPeca(PecaDomino peca, NoGrid noCentro)
     {
         List<NoGrid> nosAlvos = new List<NoGrid>();
-        bool encostouEmPecaExistente = false;
-        bool simboloBateuComSucesso = false;
+        bool adjacenciaValida = false;
 
-        // Mapeia e valida as posicoes das pontas da peca
+        // SEGUNDA JOGADA EM DIANTE: Para ser válida, o nó central onde soltou 
+        // OU pelo menos um dos nós que as asas vão cobrir DEVE já estar ocupado (ou ser vizinho direto).
+        // Se for a primeiríssima jogada no nó de baixo, liberamos direto.
+        if (noCentro.name == "No_Col_0_Lin_5" || noCentro.estaOcupado)
+        {
+            adjacenciaValida = true;
+        }
+
+        // 1. Mapear os nós do grid correspondentes à posição da peça
         foreach (var sub in peca.circulosDaPeca)
         {
             int alvoX = noCentro.x + sub.posicaoRelativa.x;
             int alvoY = noCentro.y + sub.posicaoRelativa.y;
-
             Vector2Int coordenadaAlvo = new Vector2Int(alvoX, alvoY);
 
-            // Se alguma parte essencial da peca ficar fora do grid do triangulo, cancela
+            // Se o V da peça sair para fora das bordas do triângulo, recusa na hora
             if (!dicionarioGrid.ContainsKey(coordenadaAlvo)) return false;
 
             NoGrid noAlvo = dicionarioGrid[coordenadaAlvo];
 
-            // Checa as pecas ja existentes no tabuleiro
+            // Se qualquer uma das asas tocar em um nó já ocupado por outra peça, a adjacência também se torna válida
             if (noAlvo.estaOcupado)
             {
-                encostouEmPecaExistente = true; // Achou uma peca colocada ali
+                adjacenciaValida = true;
 
-                if (noAlvo.simboloAtual == sub.simbolo)
+                // REGRA DE SÍMBOLO: Se o nó já tiver uma peça (Diferente de Nenhum), o símbolo DEVE ser igual
+                if (noAlvo.simboloAtual != TipoSimbolo.Nenhum && noAlvo.simboloAtual != sub.simbolo)
                 {
-                    simboloBateuComSucesso = true; // O simbolo da peca e igual ao do tabuleiro
-                }
-                else
-                {
-                    Debug.LogWarning("Bloqueado: O simbolo " + sub.simbolo + " nao bate com " + noAlvo.simboloAtual);
-                    return false; // Simbolos diferentes quebram a jogada
+                    Debug.LogWarning($"Símbolo incompatível em {noAlvo.name}. Esperado: {noAlvo.simboloAtual}, Recebido: {sub.simbolo}");
+                    return false;
                 }
             }
 
             nosAlvos.Add(noAlvo);
         }
 
-        // A peca obrigatoriamente precisa encostar em alguma peca que ja estava no tabuleiro e o simbolo sobreposto precisa ser valido.
-        if (encostouEmPecaExistente && simboloBateuComSucesso)
+        // 2. Se a peça está conectada ao fluxo do jogo (adjacente)
+        if (adjacenciaValida)
         {
-
-            // Fixa a peca na posicao
+            // SNAP: Fixa a peça visualmente
             peca.transform.position = noCentro.transform.position;
             peca.foiPosicionada = true;
 
-            // Grava os novos simbolos no tabuleiro para as proximas pecas usarem
+            // 3. Aplica os novos símbolos ao tabuleiro e ativa os nós
             for (int i = 0; i < peca.circulosDaPeca.Length; i++)
             {
                 nosAlvos[i].simboloAtual = peca.circulosDaPeca[i].simbolo;
+                nosAlvos[i].estaOcupado = true;
             }
 
-            Debug.Log("Jogada Valida! Peca fixada.");
+            Debug.Log($"Peça posicionada com sucesso em: {noCentro.name}");
             return true;
         }
 
-        Debug.LogWarning("Jogada Invalida: Voce tentou colocar a peca isolada do resto do tabuleiro!");
+        Debug.LogWarning("Jogada inválida: A peça precisa tocar em uma parte ativa do tabuleiro.");
         return false;
     }
 }
