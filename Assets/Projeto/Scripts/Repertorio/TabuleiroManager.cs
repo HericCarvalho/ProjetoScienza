@@ -6,11 +6,12 @@ public class TabuleiroManager : MonoBehaviour
     public static TabuleiroManager Instancia { get; private set; }
 
     [Header("Configuracoes do Grid Triangular")]
-    public int tamanhoBaseTopo = 6; // Define o número de círculos que a linha mais larga
-    public float tamanhoCirculo = 0.6f; // Define o diâmetro/tamanho que cada círculo terá no mundo do jogo
+    public int tamanhoBaseTopo = 6; // Define o nï¿½mero de cï¿½rculos que a linha mais larga
+    public float tamanhoCirculo = 0.6f; // Define o diï¿½metro/tamanho que cada cï¿½rculo terï¿½ no mundo do jogo
 
     [Header("Prefabs")]
     public GameObject prefabNoGrid;
+    public TipoSimbolo simboloInicial = TipoSimbolo.Triangulo; // Define o simbolo inicial do tabuleiro
 
     private Dictionary<Vector2Int, NoGrid> dicionarioGrid = new Dictionary<Vector2Int, NoGrid>();
 
@@ -54,7 +55,7 @@ public class TabuleiroManager : MonoBehaviour
                 // Se o seu tamanhoBaseTopo for 6, a ultima linha e a 5.
                 if (y == tamanhoBaseTopo - 1 && x == 0)
                 {
-                    noScript.simboloAtual = TipoSimbolo.Triangulo;
+                    noScript.simboloAtual = simboloInicial;
                 }
 
                 dicionarioGrid.Add(new Vector2Int(x, y), noScript);
