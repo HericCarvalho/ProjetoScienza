@@ -19,8 +19,14 @@ public class cutsceneInicial : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        StartCoroutine(SairDoTrem(7f));
+    }
+
+    System.Collections.IEnumerator SairDoTrem(float delay)
+    {
+        yield return new WaitForSeconds(delay);
         player.transform.position = Vector3.Lerp(player.transform.position, transformDaCutscene.transform.position, Time.fixedDeltaTime * 1f);
-        StartCoroutine(Dialogo(1f));
+        StartCoroutine(Dialogo(1.5f));
     }
 
     System.Collections.IEnumerator Dialogo(float delay)

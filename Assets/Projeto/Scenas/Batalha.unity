@@ -602,6 +602,7 @@ MonoBehaviour:
   tamanhoBaseTopo: 6
   tamanhoCirculo: 0.6
   prefabNoGrid: {fileID: 6264944259397446089, guid: 113aa5a939daf864b958965049b8e51e, type: 3}
+  simboloInicial: 4
 --- !u!4 &1896843634
 Transform:
   m_ObjectHideFlags: 0

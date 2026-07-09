@@ -11,6 +11,7 @@ public class TabuleiroManager : MonoBehaviour
 
     [Header("Prefabs")]
     public GameObject prefabNoGrid;
+    public TipoSimbolo simboloInicial = TipoSimbolo.Triangulo; // Define o simbolo inicial do tabuleiro
 
     private Dictionary<Vector2Int, NoGrid> dicionarioGrid = new Dictionary<Vector2Int, NoGrid>();
 
@@ -56,8 +57,7 @@ public class TabuleiroManager : MonoBehaviour
                 // Define explicitamente o ponto de partida do jogo na ponta de baixo
                 if (y == tamanhoBaseTopo - 1 && x == 0)
                 {
-                    noScript.simboloAtual = TipoSimbolo.Triangulo;
-                    noScript.estaOcupado = true;
+                    noScript.simboloAtual = simboloInicial;
                 }
 
                 dicionarioGrid.Add(new Vector2Int(x, y), noScript);
@@ -87,35 +87,35 @@ public class TabuleiroManager : MonoBehaviour
         List<NoGrid> nosAlvos = new List<NoGrid>();
         bool adjacenciaValida = false;
 
-        // SEGUNDA JOGADA EM DIANTE: Para ser válida, o nó central onde soltou 
-        // OU pelo menos um dos nós que as asas vão cobrir DEVE já estar ocupado (ou ser vizinho direto).
-        // Se for a primeiríssima jogada no nó de baixo, liberamos direto.
+        // SEGUNDA JOGADA EM DIANTE: Para ser vï¿½lida, o nï¿½ central onde soltou 
+        // OU pelo menos um dos nï¿½s que as asas vï¿½o cobrir DEVE jï¿½ estar ocupado (ou ser vizinho direto).
+        // Se for a primeirï¿½ssima jogada no nï¿½ de baixo, liberamos direto.
         if (noCentro.name == "No_Col_0_Lin_5" || noCentro.estaOcupado)
         {
             adjacenciaValida = true;
         }
 
-        // 1. Mapear os nós do grid correspondentes à posição da peça
+        // 1. Mapear os nï¿½s do grid correspondentes ï¿½ posiï¿½ï¿½o da peï¿½a
         foreach (var sub in peca.circulosDaPeca)
         {
             int alvoX = noCentro.x + sub.posicaoRelativa.x;
             int alvoY = noCentro.y + sub.posicaoRelativa.y;
             Vector2Int coordenadaAlvo = new Vector2Int(alvoX, alvoY);
 
-            // Se o V da peça sair para fora das bordas do triângulo, recusa na hora
+            // Se o V da peï¿½a sair para fora das bordas do triï¿½ngulo, recusa na hora
             if (!dicionarioGrid.ContainsKey(coordenadaAlvo)) return false;
 
             NoGrid noAlvo = dicionarioGrid[coordenadaAlvo];
 
-            // Se qualquer uma das asas tocar em um nó já ocupado por outra peça, a adjacência também se torna válida
+            // Se qualquer uma das asas tocar em um nï¿½ jï¿½ ocupado por outra peï¿½a, a adjacï¿½ncia tambï¿½m se torna vï¿½lida
             if (noAlvo.estaOcupado)
             {
                 adjacenciaValida = true;
 
-                // REGRA DE SÍMBOLO: Se o nó já tiver uma peça (Diferente de Nenhum), o símbolo DEVE ser igual
+                // REGRA DE Sï¿½MBOLO: Se o nï¿½ jï¿½ tiver uma peï¿½a (Diferente de Nenhum), o sï¿½mbolo DEVE ser igual
                 if (noAlvo.simboloAtual != TipoSimbolo.Nenhum && noAlvo.simboloAtual != sub.simbolo)
                 {
-                    Debug.LogWarning($"Símbolo incompatível em {noAlvo.name}. Esperado: {noAlvo.simboloAtual}, Recebido: {sub.simbolo}");
+                    Debug.LogWarning($"Sï¿½mbolo incompatï¿½vel em {noAlvo.name}. Esperado: {noAlvo.simboloAtual}, Recebido: {sub.simbolo}");
                     return false;
                 }
             }
@@ -123,25 +123,25 @@ public class TabuleiroManager : MonoBehaviour
             nosAlvos.Add(noAlvo);
         }
 
-        // 2. Se a peça está conectada ao fluxo do jogo (adjacente)
+        // 2. Se a peï¿½a estï¿½ conectada ao fluxo do jogo (adjacente)
         if (adjacenciaValida)
         {
-            // SNAP: Fixa a peça visualmente
+            // SNAP: Fixa a peï¿½a visualmente
             peca.transform.position = noCentro.transform.position;
             peca.foiPosicionada = true;
 
-            // 3. Aplica os novos símbolos ao tabuleiro e ativa os nós
+            // 3. Aplica os novos sï¿½mbolos ao tabuleiro e ativa os nï¿½s
             for (int i = 0; i < peca.circulosDaPeca.Length; i++)
             {
                 nosAlvos[i].simboloAtual = peca.circulosDaPeca[i].simbolo;
                 nosAlvos[i].estaOcupado = true;
             }
 
-            Debug.Log($"Peça posicionada com sucesso em: {noCentro.name}");
+            Debug.Log($"Peï¿½a posicionada com sucesso em: {noCentro.name}");
             return true;
         }
 
-        Debug.LogWarning("Jogada inválida: A peça precisa tocar em uma parte ativa do tabuleiro.");
+        Debug.LogWarning("Jogada invï¿½lida: A peï¿½a precisa tocar em uma parte ativa do tabuleiro.");
         return false;
     }
 }
