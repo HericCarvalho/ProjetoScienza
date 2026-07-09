@@ -325,7 +325,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PecaDomino
   circulosDaPeca:
   - posicaoRelativa: {x: 0, y: 0}
-    simbolo: 0
+    simbolo: 1
   - posicaoRelativa: {x: 0, y: -1}
     simbolo: 0
   - posicaoRelativa: {x: 1, y: -1}

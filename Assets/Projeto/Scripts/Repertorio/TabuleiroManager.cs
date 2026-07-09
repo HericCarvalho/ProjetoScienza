@@ -51,7 +51,6 @@ public class TabuleiroManager : MonoBehaviour
                 noScript.x = x;
                 noScript.y = y;
 
-                // A ponta de baixo (Coluna 0 da Linha 5) comeca preenchida para iniciar o jogo
                 // Se o seu tamanhoBaseTopo for 6, a ultima linha e a 5.
                 if (y == tamanhoBaseTopo - 1 && x == 0)
                 {
@@ -122,6 +121,7 @@ public class TabuleiroManager : MonoBehaviour
         // A peca obrigatoriamente precisa encostar em alguma peca que ja estava no tabuleiro e o simbolo sobreposto precisa ser valido.
         if (encostouEmPecaExistente && simboloBateuComSucesso)
         {
+
             // Fixa a peca na posicao
             peca.transform.position = noCentro.transform.position;
             peca.foiPosicionada = true;

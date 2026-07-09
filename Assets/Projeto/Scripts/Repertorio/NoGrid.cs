@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class NoGrid : MonoBehaviour
 {
-    public int x; // Coluna na matriz
-    public int y; // Linha na matriz
+    public int x;
+    public int y;
 
     // Indica qual simbolo esta ocupando este circulo agora
     public TipoSimbolo simboloAtual = TipoSimbolo.Nenhum;

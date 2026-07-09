@@ -10,7 +10,7 @@ public class ArrastarPeca : MonoBehaviour, IPointerDownHandler, IDragHandler, IP
 
     [Header("Configuracao de Encaixe")]
     [Tooltip("Quanto MENOR este numero, mais perto do circulo a peca precisa estar para grudar. Tente valores entre 0,2 e 0,5.")]
-    public float distanciaMinimaEncaixe = 0.3f; // Criado para acesso facil no Inspector
+    public float distanciaMinimaEncaixe = 0.3f;
 
     void Awake()
     {
