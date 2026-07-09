@@ -16,3 +16,4 @@ MonoBehaviour:
   nomeExibicao: Achados e Perdidos
   descricaoDetalhada: 
   iconeUI: {fileID: 6636639101973089548, guid: d43dc37a6d2a43841adf59ea35c8efcd, type: 3}
+  prefabPecaDomino: {fileID: 8254161304950247519, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
