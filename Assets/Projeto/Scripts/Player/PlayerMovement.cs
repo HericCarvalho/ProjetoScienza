@@ -30,11 +30,13 @@ public class PlayerMovement : MonoBehaviour
     {
         controls = new PlayerControls();
         rb = GetComponent<Rigidbody2D>();
+        rb.WakeUp();
         mainCam = Camera.main;
     }
     void OnEnable()
     {
         // Ativa os Botoes
+        
         controls.Enable();
 
         // Evento de movimento WASD
@@ -53,9 +55,31 @@ public class PlayerMovement : MonoBehaviour
     void OnDisable()
     {
         controls.Disable();
+        moveInput = Vector2.zero; 
     }
 
     #endregion
+
+    private bool canMove = true;
+
+   //public void SetMovementEnabled(bool enabled)
+   //{
+   //    canMove = enabled;
+   //    if (!canMove)
+   //        moveInput = Vector2.zero;
+   //    else
+   //    {
+   //        if (controls != null)
+   //        {
+   //            moveInput = controls.Player.Move.ReadValue<Vector2>();
+   //            mousePos = controls.Player.Look.ReadValue<Vector2>();
+   //        }
+   //        else
+   //        {
+   //            moveInput = Vector2.zero;
+   //        }
+   //    }
+   //}
 
     #region ATUALIZAÇÃO DA FÍSICA
     void FixedUpdate()
@@ -66,6 +90,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void ProcessarMovimento()
     {
+        if (!canMove)
+            return;
+
         Vector2 novaPosicao = rb.position + moveInput * moveSpeed * Time.fixedDeltaTime;
         rb.MovePosition(novaPosicao);
     }
