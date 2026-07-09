@@ -14,7 +14,7 @@ public class RepertorioDados : MonoBehaviour
         if (Instancia == null)
         {
             Instancia = this;
-            DontDestroyOnLoad(gameObject); // O SEGREDO: Não destrói ao mudar de cena
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -27,7 +27,7 @@ public class RepertorioDados : MonoBehaviour
     {
         if (string.IsNullOrEmpty(id)) return false;
 
-        // HashSet.Add retorna false se o item já existia na lista (evita duplicatas)
+        // HashSet.Add retorna false se o item já existia na lista
         if (referenciasColetadas.Add(id))
         {
             return true;
@@ -39,5 +39,10 @@ public class RepertorioDados : MonoBehaviour
     public bool JaPossuiReferencia(string id)
     {
         return referenciasColetadas.Contains(id);
+    }
+    // Retorna a lista de todas as referencias coletadas
+    public HashSet<string> ObterReferenciasColetadas()
+    {
+        return referenciasColetadas;
     }
 }

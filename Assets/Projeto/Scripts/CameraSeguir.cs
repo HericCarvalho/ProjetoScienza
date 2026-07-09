@@ -5,11 +5,11 @@ public class CameraSeguir : MonoBehaviour
     [Header("Alvo")]
     public Transform alvo;
 
-    [Header("Configurações de Movimento")]
+    [Header("Configuraï¿½ï¿½es de Movimento")]
     public float suavidade = 5f;
     public float offsetZ = -10f;
 
-    void FixedUpdate()
+    void Update()
     {
         if (alvo == null) return;
 

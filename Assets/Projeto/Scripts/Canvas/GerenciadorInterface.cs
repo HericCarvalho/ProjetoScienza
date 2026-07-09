@@ -8,19 +8,19 @@ public class GerenciadorInterface : MonoBehaviour
 {
     public static GerenciadorInterface Instancia { get; private set; }
 
-    [Header("Configurações Gerais")]
+    [Header("Configuraï¿½ï¿½es Gerais")]
     public float velocidadeFade = 8f;
 
-    [Header("Sistema de Notificação")]
+    [Header("Sistema de Notificaï¿½ï¿½o")]
     public CanvasGroup grupoNotificacao;
     public TextMeshProUGUI textoNotificacao;
     public Image iconeNotificacao;
     public float tempoExibicaoNotificacao = 2.5f;
 
-    [Header("Indicador de Interação [E]")]
+    [Header("Indicador de Interaï¿½ï¿½o [E]")]
     public CanvasGroup grupoIndicadorE; 
 
-    [Header("MENU MOCHILA / REPERTÓRIO")]
+    [Header("MENU MOCHILA / REPERTï¿½RIO")]
     public CanvasGroup grupoMenuRepertorio;
     public ReferenciaData[] todasAsReferenciasDoJogo;
     public Transform containerItens;
@@ -66,7 +66,7 @@ public class GerenciadorInterface : MonoBehaviour
         }
     }
 
-    #region CONTROLE DO MENU DE REPERTÓRIO
+    #region CONTROLE DO MENU DE REPERTï¿½RIO
     private void OnOpenRepertorioPerformed(InputAction.CallbackContext ctx)
     {
         if (ctx.ReadValueAsButton())
@@ -74,20 +74,20 @@ public class GerenciadorInterface : MonoBehaviour
             AlternarMochila();
         }
     }
-    private void AlternarMochila()
+    public void AlternarMochila()
     {
         menuAberto = !menuAberto;
 
         if (menuAberto)
         {
             AtualizarVisualDoRepertorio();
-            ForçarFade(ref coroutineMenu, grupoMenuRepertorio, 1f, true); // Usando Unscaled Time (Corrige o bug do 0.03)
+            ForcarFade(ref coroutineMenu, grupoMenuRepertorio, 1f, true); // Usando Unscaled Time (Corrige o bug do 0.03)
             grupoMenuRepertorio.blocksRaycasts = true;
             Time.timeScale = 0f;
         }
         else
         {
-            ForçarFade(ref coroutineMenu, grupoMenuRepertorio, 0f, true);
+            ForcarFade(ref coroutineMenu, grupoMenuRepertorio, 0f, true);
             grupoMenuRepertorio.blocksRaycasts = false;
             Time.timeScale = 1f;
         }
@@ -113,11 +113,11 @@ public class GerenciadorInterface : MonoBehaviour
 
                 if (slotScript != null && slotScript.imagemDoIcone != null)
                 {
-                    // Alimenta os dados direto nos campos que você arrastou no Inspector
+                    // Alimenta os dados direto nos campos que vocï¿½ arrastou no Inspector
                     slotScript.imagemDoIcone.sprite = refData.iconeUI;
                     slotScript.textoDoNome.text = refData.nomeExibicao;
 
-                    // Força a cor para branco com Alpha 1 para garantir que não fique transparente
+                    // Forï¿½a a cor para branco com Alpha 1 para garantir que nï¿½o fique transparente
                     slotScript.imagemDoIcone.color = Color.white;
                 }
             }
@@ -125,21 +125,21 @@ public class GerenciadorInterface : MonoBehaviour
     }
     #endregion
 
-    #region CONTROLE DO BOTÃO [E]
+    #region CONTROLE DO BOTï¿½O [E]
     // Chamado pelo Player ao chegar perto de um item
     public void MostrarBotaoE()
     {
-        ForçarFade(ref coroutineFadeE, grupoIndicadorE, 1f, false);
+        ForcarFade(ref coroutineFadeE, grupoIndicadorE, 1f, false);
     }
 
     // Chamado pelo Player ao se afastar ou interagir com o item
     public void EsconderBotaoE()
     {
-        ForçarFade(ref coroutineFadeE, grupoIndicadorE, 0f, false);
+        ForcarFade(ref coroutineFadeE, grupoIndicadorE, 0f, false);
     }
     #endregion
 
-    #region LÓGICA DE NOTIFICAÇÃO
+    #region LÃ“GICA DE NOTIFICACAO
     public void MostrarNotificacao(string nomeDoItem, Sprite spriteDoIcone = null)
     {
         if (coroutineNotificacao != null) StopCoroutine(coroutineNotificacao);
@@ -148,7 +148,7 @@ public class GerenciadorInterface : MonoBehaviour
 
     private IEnumerator FluxoNotificacao(string nomeDoItem, Sprite spriteDoIcone)
     {
-        textoNotificacao.text = $"Você encontrou: {nomeDoItem}!";
+        textoNotificacao.text = $"VocÃª encontrou: {nomeDoItem}!";
 
         if (spriteDoIcone != null && iconeNotificacao != null)
         {
@@ -174,7 +174,7 @@ public class GerenciadorInterface : MonoBehaviour
     #endregion
 
     #region AUXILIARES DE FADE
-    private void ForçarFade(ref Coroutine c, CanvasGroup g, float target, bool usarUnscaledTime)
+    private void ForcarFade(ref Coroutine c, CanvasGroup g, float target, bool usarUnscaledTime)
     {
         if (c != null) StopCoroutine(c);
         c = StartCoroutine(FadeElemento(g, target, usarUnscaledTime));
