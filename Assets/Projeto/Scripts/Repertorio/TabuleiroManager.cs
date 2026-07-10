@@ -11,7 +11,7 @@ public class TabuleiroManager : MonoBehaviour
 
     [Header("Prefabs")]
     public GameObject prefabNoGrid;
-    public TipoSimbolo simboloInicial = TipoSimbolo.Triangulo; // Define o simbolo inicial do tabuleiro
+    public TipoSimbolo simboloInicial = TipoSimbolo.Triangulo;
 
     private Dictionary<Vector2Int, NoGrid> dicionarioGrid = new Dictionary<Vector2Int, NoGrid>();
 
@@ -54,10 +54,10 @@ public class TabuleiroManager : MonoBehaviour
                 noScript.simboloAtual = TipoSimbolo.Nenhum;
                 noScript.estaOcupado = false;
 
-                // Define explicitamente o ponto de partida do jogo na ponta de baixo
                 if (y == tamanhoBaseTopo - 1 && x == 0)
                 {
                     noScript.simboloAtual = simboloInicial;
+                    noScript.estaOcupado = true;
                 }
 
                 dicionarioGrid.Add(new Vector2Int(x, y), noScript);
@@ -85,63 +85,97 @@ public class TabuleiroManager : MonoBehaviour
     public bool TentarPosicionarPeca(PecaDomino peca, NoGrid noCentro)
     {
         List<NoGrid> nosAlvos = new List<NoGrid>();
-        bool adjacenciaValida = false;
 
-        // SEGUNDA JOGADA EM DIANTE: Para ser v�lida, o n� central onde soltou 
-        // OU pelo menos um dos n�s que as asas v�o cobrir DEVE j� estar ocupado (ou ser vizinho direto).
-        // Se for a primeir�ssima jogada no n� de baixo, liberamos direto.
-        if (noCentro.name == "No_Col_0_Lin_5" || noCentro.estaOcupado)
-        {
-            adjacenciaValida = true;
-        }
-
-        // 1. Mapear os n�s do grid correspondentes � posi��o da pe�a
         foreach (var sub in peca.circulosDaPeca)
         {
             int alvoX = noCentro.x + sub.posicaoRelativa.x;
             int alvoY = noCentro.y + sub.posicaoRelativa.y;
             Vector2Int coordenadaAlvo = new Vector2Int(alvoX, alvoY);
 
-            // Se o V da pe�a sair para fora das bordas do tri�ngulo, recusa na hora
-            if (!dicionarioGrid.ContainsKey(coordenadaAlvo)) return false;
-
-            NoGrid noAlvo = dicionarioGrid[coordenadaAlvo];
-
-            // Se qualquer uma das asas tocar em um n� j� ocupado por outra pe�a, a adjac�ncia tamb�m se torna v�lida
-            if (noAlvo.estaOcupado)
+            if (!dicionarioGrid.ContainsKey(coordenadaAlvo))
             {
-                adjacenciaValida = true;
+                Debug.LogWarning("[BLOQUEADO] A peça sairia para fora dos limites do tabuleiro.");
+                return false;
+            }
 
-                // REGRA DE S�MBOLO: Se o n� j� tiver uma pe�a (Diferente de Nenhum), o s�mbolo DEVE ser igual
-                if (noAlvo.simboloAtual != TipoSimbolo.Nenhum && noAlvo.simboloAtual != sub.simbolo)
+            nosAlvos.Add(dicionarioGrid[coordenadaAlvo]);
+        }
+
+        bool jogoJaComecou = TotalNosOcupados() > 1;
+        bool encostouEmPecaAtiva = false;
+
+        if (!jogoJaComecou && noCentro.name != "No_Col_0_Lin_5")
+        {
+            Debug.LogWarning("[BLOQUEADO] O jogo deve começar obrigatoriamente na ponta inferior (No_Col_0_Lin_5)!");
+            return false;
+        }
+
+        if (noCentro.name == "No_Col_0_Lin_5" || noCentro.estaOcupado)
+        {
+            encostouEmPecaAtiva = true;
+        }
+
+        foreach (NoGrid no in nosAlvos)
+        {
+            if (no.estaOcupado)
+            {
+                encostouEmPecaAtiva = true;
+            }
+        }
+
+        if (!encostouEmPecaAtiva)
+        {
+            Debug.LogWarning("[BLOQUEADO] A peça precisa se conectar a uma parte ativa do tabuleiro.");
+            return false;
+        }
+
+        for (int i = 0; i < peca.circulosDaPeca.Length; i++)
+        {
+            var partePeca = peca.circulosDaPeca[i];
+            NoGrid noTabuleiro = nosAlvos[i];
+
+            if (noTabuleiro.simboloAtual != TipoSimbolo.Nenhum)
+            {
+                if (noTabuleiro.simboloAtual != partePeca.simbolo)
                 {
-                    Debug.LogWarning($"S�mbolo incompat�vel em {noAlvo.name}. Esperado: {noAlvo.simboloAtual}, Recebido: {sub.simbolo}");
+                    Debug.LogWarning($"[BLOQUEADO] Erro de correspondência em {noTabuleiro.name}. Tabuleiro: {noTabuleiro.simboloAtual}, Peça: {partePeca.simbolo}");
                     return false;
                 }
             }
-
-            nosAlvos.Add(noAlvo);
         }
 
-        // 2. Se a pe�a est� conectada ao fluxo do jogo (adjacente)
-        if (adjacenciaValida)
-        {
-            // SNAP: Fixa a pe�a visualmente
-            peca.transform.position = noCentro.transform.position;
-            peca.foiPosicionada = true;
+        peca.transform.position = noCentro.transform.position;
+        peca.foiPosicionada = true;
 
-            // 3. Aplica os novos s�mbolos ao tabuleiro e ativa os n�s
-            for (int i = 0; i < peca.circulosDaPeca.Length; i++)
+        List<int> indicesQueSobrepuseram = new List<int>();
+
+        for (int i = 0; i < peca.circulosDaPeca.Length; i++)
+        {
+            if (nosAlvos[i].estaOcupado && nosAlvos[i].simboloAtual == peca.circulosDaPeca[i].simbolo)
             {
-                nosAlvos[i].simboloAtual = peca.circulosDaPeca[i].simbolo;
-                nosAlvos[i].estaOcupado = true;
+                indicesQueSobrepuseram.Add(i);
             }
 
-            Debug.Log($"Pe�a posicionada com sucesso em: {noCentro.name}");
-            return true;
+            nosAlvos[i].simboloAtual = peca.circulosDaPeca[i].simbolo;
+            nosAlvos[i].estaOcupado = true;
+        }
+        PecaFeedback feedback = peca.GetComponent<PecaFeedback>();
+        if (feedback != null && indicesQueSobrepuseram.Count > 0)
+        {
+            feedback.AplicarBrilhoDourado(indicesQueSobrepuseram);
         }
 
-        Debug.LogWarning("Jogada inv�lida: A pe�a precisa tocar em uma parte ativa do tabuleiro.");
-        return false;
+        Debug.Log($"[SUCESSO] Peça posicionada corretamente em: {noCentro.name}");
+        return true;
+    }
+
+    private int TotalNosOcupados()
+    {
+        int count = 0;
+        foreach (var no in dicionarioGrid.Values)
+        {
+            if (no.estaOcupado) count++;
+        }
+        return count;
     }
 }

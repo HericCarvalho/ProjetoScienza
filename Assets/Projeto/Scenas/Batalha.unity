@@ -119,7 +119,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &47579066
+--- !u!1001 &70104326
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -129,19 +129,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 429199377705958662, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
       propertyPath: circulosDaPeca.Array.data[0].simbolo
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 429199377705958662, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
-      propertyPath: circulosDaPeca.Array.data[1].simbolo
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 681772272678101059, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.91
+      value: -6.840885
       objectReference: {fileID: 0}
     - target: {fileID: 681772272678101059, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.5191402
+      value: -1.548759
       objectReference: {fileID: 0}
     - target: {fileID: 681772272678101059, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -177,68 +173,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8254161304950247519, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
       propertyPath: m_Name
-      value: "Pe\xE7a_Tecnologia_Humano_Arte (3)"
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
---- !u!1001 &142286849
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 429199377705958662, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
-      propertyPath: circulosDaPeca.Array.data[1].simbolo
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 681772272678101059, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -6.3558
-      objectReference: {fileID: 0}
-    - target: {fileID: 681772272678101059, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.33
-      objectReference: {fileID: 0}
-    - target: {fileID: 681772272678101059, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 681772272678101059, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 681772272678101059, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 681772272678101059, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 681772272678101059, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 681772272678101059, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 681772272678101059, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 681772272678101059, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8254161304950247519, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
-      propertyPath: m_Name
-      value: "Pe\xE7a_Tecnologia_Humano_Arte (4)"
+      value: "Pe\xE7a_Tecnologia_Humano_Arte"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -324,7 +259,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &691856057
+--- !u!1 &773583874
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 773583875}
+  m_Layer: 0
+  m_Name: Repertorio
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &773583875
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 773583874}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.64, y: -2.07, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1096862185
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -333,16 +299,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 429199377705958662, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
-      propertyPath: circulosDaPeca.Array.data[1].simbolo
-      value: 1
+      propertyPath: circulosDaPeca.Array.data[0].simbolo
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 681772272678101059, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.3558
+      value: -5.381815
       objectReference: {fileID: 0}
     - target: {fileID: 681772272678101059, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.5191402
+      value: -1.5269818
       objectReference: {fileID: 0}
     - target: {fileID: 681772272678101059, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -385,37 +351,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
---- !u!1 &773583874
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 773583875}
-  m_Layer: 0
-  m_Name: Repertorio
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &773583875
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 773583874}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.64, y: -2.07, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1379045232
 GameObject:
   m_ObjectHideFlags: 0
@@ -448,64 +383,7 @@ Transform:
   - {fileID: 2145841653}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1383919611
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 681772272678101059, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -6.3780675
-      objectReference: {fileID: 0}
-    - target: {fileID: 681772272678101059, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1.1162832
-      objectReference: {fileID: 0}
-    - target: {fileID: 681772272678101059, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 681772272678101059, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 681772272678101059, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 681772272678101059, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 681772272678101059, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 681772272678101059, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 681772272678101059, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 681772272678101059, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8254161304950247519, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
-      propertyPath: m_Name
-      value: "Pe\xE7a_Tecnologia_Humano_Arte"
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
---- !u!1001 &1624874234
+--- !u!1001 &1702453447
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -514,20 +392,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 429199377705958662, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
-      propertyPath: circulosDaPeca.Array.data[1].simbolo
+      propertyPath: circulosDaPeca.Array.data[0].simbolo
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 429199377705958662, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
-      propertyPath: circulosDaPeca.Array.data[2].simbolo
-      value: 3
+      propertyPath: circulosDaPeca.Array.data[1].simbolo
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 681772272678101059, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.84
+      value: -5.4471464
       objectReference: {fileID: 0}
     - target: {fileID: 681772272678101059, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.09
+      value: -2.8336117
       objectReference: {fileID: 0}
     - target: {fileID: 681772272678101059, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -563,7 +441,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8254161304950247519, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
       propertyPath: m_Name
-      value: "Pe\xE7a_Tecnologia_Humano_Arte (2)"
+      value: "Pe\xE7a_Tecnologia_Humano_Arte (3)"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -602,7 +480,7 @@ MonoBehaviour:
   tamanhoBaseTopo: 6
   tamanhoCirculo: 0.6
   prefabNoGrid: {fileID: 6264944259397446089, guid: 113aa5a939daf864b958965049b8e51e, type: 3}
-  simboloInicial: 4
+  simboloInicial: 2
 --- !u!4 &1896843634
 Transform:
   m_ObjectHideFlags: 0
@@ -772,6 +650,67 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_MaxRayIntersections: 0
+--- !u!1001 &2072833536
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 429199377705958662, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
+      propertyPath: circulosDaPeca.Array.data[0].simbolo
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 681772272678101059, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6.840885
+      objectReference: {fileID: 0}
+    - target: {fileID: 681772272678101059, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.8989432
+      objectReference: {fileID: 0}
+    - target: {fileID: 681772272678101059, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 681772272678101059, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 681772272678101059, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 681772272678101059, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 681772272678101059, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 681772272678101059, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 681772272678101059, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 681772272678101059, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8254161304950247519, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
+      propertyPath: m_Name
+      value: "Pe\xE7a_Tecnologia_Humano_Arte (2)"
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
 --- !u!1 &2116555173
 GameObject:
   m_ObjectHideFlags: 0
@@ -801,8 +740,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa2492b041746e04c93b882221cf64ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GerenciadorDePartida
-  todasAsReferenciasDoJogo:
-  - {fileID: 11400000, guid: 14bbb8ac8d0c9204ead9b833c201201d, type: 2}
+  todasAsReferenciasDoJogo: []
   localDaMao: {fileID: 773583875}
   espacamentoMao: 1.5
 --- !u!4 &2116555175
@@ -921,8 +859,7 @@ SceneRoots:
   - {fileID: 1896843634}
   - {fileID: 773583875}
   - {fileID: 2116555175}
-  - {fileID: 1383919611}
-  - {fileID: 691856057}
-  - {fileID: 1624874234}
-  - {fileID: 47579066}
-  - {fileID: 142286849}
+  - {fileID: 70104326}
+  - {fileID: 1096862185}
+  - {fileID: 2072833536}
+  - {fileID: 1702453447}
