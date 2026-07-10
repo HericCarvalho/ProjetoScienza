@@ -7,4 +7,5 @@ public class NoGrid : MonoBehaviour
     public TipoSimbolo simboloAtual = TipoSimbolo.Nenhum;
 
     public bool estaOcupado = false;
+    public bool jaEstaDourado = false;
 }
