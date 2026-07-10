@@ -15,11 +15,11 @@ EditorBuildSettings:
     path: "Assets/Projeto/Scenas/Esta\xE7\xE3o.unity"
     guid: 46c36cbaa86c3d548be152ebc58ba07b
   - enabled: 1
-    path: Assets/Projeto/Scenas/Batalha Matheus.unity
-    guid: b82ae893f6b3af74aa96a7b571cfa12a
-  - enabled: 1
     path: Assets/Projeto/Scenas/Batalha.unity
     guid: 8876b758d5a5caa48bfbbbb273ccd805
+  - enabled: 0
+    path: Assets/Projeto/Scenas/Batalha Matheus.unity
+    guid: b82ae893f6b3af74aa96a7b571cfa12a
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
