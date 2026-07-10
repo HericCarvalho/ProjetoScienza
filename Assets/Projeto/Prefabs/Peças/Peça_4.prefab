@@ -82,7 +82,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -173,7 +173,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -264,11 +264,11 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.32, y: 0.32}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -287,7 +287,7 @@ GameObject:
   - component: {fileID: 6302573045330634863}
   - component: {fileID: 6950920177131606977}
   m_Layer: 0
-  m_Name: "Pe\xE7a_Tecnologia_Humano_Arte"
+  m_Name: "Pe\xE7a_4"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -325,11 +325,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PecaDomino
   circulosDaPeca:
   - posicaoRelativa: {x: 0, y: 0}
-    simbolo: 1
+    simbolo: 3
   - posicaoRelativa: {x: 0, y: -1}
-    simbolo: 0
+    simbolo: 5
   - posicaoRelativa: {x: 1, y: -1}
-    simbolo: 0
+    simbolo: 2
   foiPosicionada: 0
 --- !u!114 &7284342532571723881
 MonoBehaviour:

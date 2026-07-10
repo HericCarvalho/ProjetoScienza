@@ -9,7 +9,7 @@ public class CameraSeguir : MonoBehaviour
     public float suavidade = 5f;
     public float offsetZ = -10f;
 
-    void Update()
+    void LateUpdate()
     {
         if (alvo == null) return;
 

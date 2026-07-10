@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c121d5ff179a7374eac9168abc4afc46, type: 3}
-  m_Name: Sinal de Deficiente
+  m_Name: Pao de queijo
   m_EditorClassIdentifier: Assembly-CSharp::ReferenciaData
-  idUnico: 08
-  nomeExibicao: Sinal de Deficiente
+  idUnico: 04
+  nomeExibicao: "P\xE3o de Queijo"
   descricaoDetalhada: 
-  iconeUI: {fileID: 512198454703148881, guid: d43dc37a6d2a43841adf59ea35c8efcd, type: 3}
+  iconeUI: {fileID: -3201601741076559238, guid: d43dc37a6d2a43841adf59ea35c8efcd, type: 3}
+  prefabPecaDomino: {fileID: 8254161304950247519, guid: 9c86f71bcfecd034793c2499c7db4520, type: 3}

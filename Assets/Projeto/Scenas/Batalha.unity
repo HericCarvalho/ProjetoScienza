@@ -494,6 +494,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GerenciadorDePartida
   todasAsReferenciasDoJogo:
   - {fileID: 11400000, guid: 14bbb8ac8d0c9204ead9b833c201201d, type: 2}
+  - {fileID: 11400000, guid: 096b98113ae8fc84793b67f05d644866, type: 2}
+  - {fileID: 11400000, guid: 81932fc81c9e20a4695cc8e9d5a2d8cb, type: 2}
+  - {fileID: 11400000, guid: e4171d3f05d051d4d931cb6476d70291, type: 2}
+  - {fileID: 11400000, guid: 5a406f0d1c78e604787d83b5e6b6b5b0, type: 2}
+  - {fileID: 11400000, guid: 859fda7c8be72954ebd30b10360194a7, type: 2}
+  - {fileID: 11400000, guid: ede2b954fef2ff6449664caa3fb83bde, type: 2}
+  - {fileID: 11400000, guid: 61d2b1856b9f67d45b88b1a3ee5173b2, type: 2}
+  - {fileID: 11400000, guid: 43591ebc4a88e094d939ef6e5d3d5654, type: 2}
+  - {fileID: 11400000, guid: 6ce829986487e2146bac04bc5fa5e086, type: 2}
+  - {fileID: 11400000, guid: 3a81f25d9a476fc4f8b182cfc9d1752a, type: 2}
   localDaMao: {fileID: 773583875}
   espacamentoMao: 1.5
 --- !u!4 &2116555175

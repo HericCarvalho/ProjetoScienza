@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c121d5ff179a7374eac9168abc4afc46, type: 3}
-  m_Name: Artes
+  m_Name: Picho no trem
   m_EditorClassIdentifier: Assembly-CSharp::ReferenciaData
-  idUnico: 06
-  nomeExibicao: Artes
+  idUnico: 00
+  nomeExibicao: Picho no trem
   descricaoDetalhada: 
-  iconeUI: {fileID: 9199052627421656880, guid: d43dc37a6d2a43841adf59ea35c8efcd, type: 3}
+  iconeUI: {fileID: 2037196685482824029, guid: d43dc37a6d2a43841adf59ea35c8efcd, type: 3}
+  prefabPecaDomino: {fileID: 8254161304950247519, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}

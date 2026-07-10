@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c121d5ff179a7374eac9168abc4afc46, type: 3}
-  m_Name: "M\xFAsico"
+  m_Name: Outdoor
   m_EditorClassIdentifier: Assembly-CSharp::ReferenciaData
-  idUnico: 03
-  nomeExibicao: "M\xFAsico"
+  idUnico: 02
+  nomeExibicao: Outdoor
   descricaoDetalhada: 
-  iconeUI: {fileID: 3330187476926645551, guid: d43dc37a6d2a43841adf59ea35c8efcd, type: 3}
+  iconeUI: {fileID: -7574667980544689397, guid: d43dc37a6d2a43841adf59ea35c8efcd, type: 3}
+  prefabPecaDomino: {fileID: 8254161304950247519, guid: 355628d6a4635644693509f0d5ed1922, type: 3}
