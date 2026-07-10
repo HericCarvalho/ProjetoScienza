@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c121d5ff179a7374eac9168abc4afc46, type: 3}
-  m_Name: Picho na privada
+  m_Name: Fofoca
   m_EditorClassIdentifier: Assembly-CSharp::ReferenciaData
-  idUnico: 05
-  nomeExibicao: Picho na privada
+  idUnico: 09
+  nomeExibicao: Fofoca
   descricaoDetalhada: 
-  iconeUI: {fileID: 892213705547639563, guid: d43dc37a6d2a43841adf59ea35c8efcd, type: 3}
+  iconeUI: {fileID: -5161707253683754481, guid: d43dc37a6d2a43841adf59ea35c8efcd, type: 3}
+  prefabPecaDomino: {fileID: 8254161304950247519, guid: 041c0fa095b4c2b4ca7a6c2067302e93, type: 3}

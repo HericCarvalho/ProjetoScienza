@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c121d5ff179a7374eac9168abc4afc46, type: 3}
-  m_Name: Achados e Perdidos
+  m_Name: Totem
   m_EditorClassIdentifier: Assembly-CSharp::ReferenciaData
-  idUnico: 07
-  nomeExibicao: Achados e Perdidos
+  idUnico: 10
+  nomeExibicao: Totem
   descricaoDetalhada: 
-  iconeUI: {fileID: 6636639101973089548, guid: d43dc37a6d2a43841adf59ea35c8efcd, type: 3}
-  prefabPecaDomino: {fileID: 8254161304950247519, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}
+  iconeUI: {fileID: -424786971313601370, guid: d43dc37a6d2a43841adf59ea35c8efcd, type: 3}
+  prefabPecaDomino: {fileID: 8254161304950247519, guid: 50e33be25b3ec7a49bb3b4d34cde21cb, type: 3}
