@@ -1,0 +1,975 @@
+fileFormatVersion: 2
+guid: cca5c4010ceb23944ab8e818e7706076
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6290722486578385647
+    second: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_0
+  - first:
+      213: 9121126218285421336
+    second: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_1
+  - first:
+      213: 6964255148226487759
+    second: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_2
+  - first:
+      213: -7743757580095066044
+    second: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_3
+  - first:
+      213: -4647030446282995877
+    second: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_4
+  - first:
+      213: -835576849129893941
+    second: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_5
+  - first:
+      213: -1488878100038828992
+    second: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_6
+  - first:
+      213: -3354320156826807564
+    second: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_7
+  - first:
+      213: -2043508926209621653
+    second: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_8
+  - first:
+      213: -5165360391668710790
+    second: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_9
+  - first:
+      213: -2161618045308096209
+    second: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_10
+  - first:
+      213: 3583179829519942823
+    second: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_11
+  - first:
+      213: 2141670953046658123
+    second: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_12
+  - first:
+      213: 8757632175678116408
+    second: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_13
+  - first:
+      213: 4043123823343151850
+    second: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_14
+  - first:
+      213: 5673884741300732435
+    second: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_15
+  - first:
+      213: -1529445875929911710
+    second: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_16
+  - first:
+      213: -8807500267639559630
+    second: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_17
+  - first:
+      213: 4908000423691552695
+    second: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_18
+  - first:
+      213: 7747691721384826670
+    second: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_19
+  - first:
+      213: -3300124829741332978
+    second: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_20
+  - first:
+      213: -3623835838207731996
+    second: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_21
+  - first:
+      213: 502675566976250472
+    second: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_22
+  - first:
+      213: 1864434634909491931
+    second: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_23
+  - first:
+      213: -4738033518258610634
+    second: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_24
+  - first:
+      213: 606585225716259678
+    second: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_25
+  - first:
+      213: -2737045281250803136
+    second: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_26
+  - first:
+      213: 1138824809361227938
+    second: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_27
+  - first:
+      213: 3546274931879734361
+    second: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_28
+  - first:
+      213: -5532290973615618705
+    second: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_29
+  - first:
+      213: -980717239444533610
+    second: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_30
+  - first:
+      213: 1296477671321144991
+    second: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_31
+  - first:
+      213: -5567196404038955526
+    second: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_32
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_0
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 946
+        width: 248
+        height: 247
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe2111995c22d4750800000000000000
+      internalID: 6290722486578385647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_1
+      rect:
+        serializedVersion: 2
+        x: 460
+        y: 1065
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 813976048ffb49e70800000000000000
+      internalID: 9121126218285421336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_2
+      rect:
+        serializedVersion: 2
+        x: 485
+        y: 1090
+        width: 35
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc5a93bb82106a060800000000000000
+      internalID: 6964255148226487759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_3
+      rect:
+        serializedVersion: 2
+        x: 607
+        y: 946
+        width: 248
+        height: 247
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 440f1b35285a88490800000000000000
+      internalID: -7743757580095066044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_4
+      rect:
+        serializedVersion: 2
+        x: 1061
+        y: 1065
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5780ec1e6e628fb0800000000000000
+      internalID: -4647030446282995877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_5
+      rect:
+        serializedVersion: 2
+        x: 1086
+        y: 1090
+        width: 35
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bcf8215684f6764f0800000000000000
+      internalID: -835576849129893941
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_6
+      rect:
+        serializedVersion: 2
+        x: 404
+        y: 1008
+        width: 52
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04cb355a141765be0800000000000000
+      internalID: -1488878100038828992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_7
+      rect:
+        serializedVersion: 2
+        x: 446
+        y: 1045
+        width: 23
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f2d76dd69f0371d0800000000000000
+      internalID: -3354320156826807564
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_8
+      rect:
+        serializedVersion: 2
+        x: 1005
+        y: 1008
+        width: 52
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b618fe5657ff3a3e0800000000000000
+      internalID: -2043508926209621653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_9
+      rect:
+        serializedVersion: 2
+        x: 1047
+        y: 1045
+        width: 23
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a72c6bd4714f058b0800000000000000
+      internalID: -5165360391668710790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_10
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 947
+        width: 42
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f21365d27d36002e0800000000000000
+      internalID: -2161618045308096209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_11
+      rect:
+        serializedVersion: 2
+        x: 379
+        y: 978
+        width: 41
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a481e802130ab130800000000000000
+      internalID: 3583179829519942823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_12
+      rect:
+        serializedVersion: 2
+        x: 949
+        y: 947
+        width: 42
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4c4e1e726eb8bd10800000000000000
+      internalID: 2141670953046658123
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_13
+      rect:
+        serializedVersion: 2
+        x: 980
+        y: 978
+        width: 41
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83253d8501c598970800000000000000
+      internalID: 8757632175678116408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_14
+      rect:
+        serializedVersion: 2
+        x: 181
+        y: 786
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aeaa94922bf0c1830800000000000000
+      internalID: 4043123823343151850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_15
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 811
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3124db55c10bdbe40800000000000000
+      internalID: 5673884741300732435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_16
+      rect:
+        serializedVersion: 2
+        x: 258
+        y: 261
+        width: 930
+        height: 686
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26ee206441156cae0800000000000000
+      internalID: -1529445875929911710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_17
+      rect:
+        serializedVersion: 2
+        x: 125
+        y: 728
+        width: 52
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23aaf24bb2975c580800000000000000
+      internalID: -8807500267639559630
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_18
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 766
+        width: 23
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b70a93b168bc1440800000000000000
+      internalID: 4908000423691552695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_19
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 668
+        width: 42
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2790625294558b60800000000000000
+      internalID: 7747691721384826670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_20
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 699
+        width: 41
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e0642d0c3f99332d0800000000000000
+      internalID: -3300124829741332978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_21
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 261
+        width: 341
+        height: 331
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e65c4b418c85bdc0800000000000000
+      internalID: -3623835838207731996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_22
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 127
+        width: 123
+        height: 159
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86233eec3ccd9f600800000000000000
+      internalID: 502675566976250472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_23
+      rect:
+        serializedVersion: 2
+        x: 332
+        y: 13
+        width: 255
+        height: 254
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd227b81c6dcfd910800000000000000
+      internalID: 1864434634909491931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_24
+      rect:
+        serializedVersion: 2
+        x: 933
+        y: 13
+        width: 255
+        height: 254
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63e1d4a4e9f1f3eb0800000000000000
+      internalID: -4738033518258610634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_25
+      rect:
+        serializedVersion: 2
+        x: 782
+        y: 185
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5b51d88c060b6800800000000000000
+      internalID: 606585225716259678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_26
+      rect:
+        serializedVersion: 2
+        x: 807
+        y: 210
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04203e471df040ad0800000000000000
+      internalID: -2737045281250803136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_27
+      rect:
+        serializedVersion: 2
+        x: 726
+        y: 127
+        width: 52
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a0c06f512bedcf00800000000000000
+      internalID: 1138824809361227938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_28
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 165
+        width: 23
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95c6096f246e63130800000000000000
+      internalID: 3546274931879734361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_29
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 67
+        width: 42
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f658a8bbbaa5933b0800000000000000
+      internalID: -5532290973615618705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_30
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 98
+        width: 41
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69e8ec5eddac362f0800000000000000
+      internalID: -980717239444533610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_31
+      rect:
+        serializedVersion: 2
+        x: 670
+        y: 67
+        width: 42
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9e8252b2930ef110800000000000000
+      internalID: 1296477671321144991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_32
+      rect:
+        serializedVersion: 2
+        x: 701
+        y: 98
+        width: 41
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: afd0d66ed585db2b0800000000000000
+      internalID: -5567196404038955526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_0: 6290722486578385647
+      pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_1: 9121126218285421336
+      pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_10: -2161618045308096209
+      pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_11: 3583179829519942823
+      pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_12: 2141670953046658123
+      pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_13: 8757632175678116408
+      pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_14: 4043123823343151850
+      pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_15: 5673884741300732435
+      pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_16: -1529445875929911710
+      pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_17: -8807500267639559630
+      pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_18: 4908000423691552695
+      pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_19: 7747691721384826670
+      pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_2: 6964255148226487759
+      pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_20: -3300124829741332978
+      pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_21: -3623835838207731996
+      pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_22: 502675566976250472
+      pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_23: 1864434634909491931
+      pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_24: -4738033518258610634
+      pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_25: 606585225716259678
+      pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_26: -2737045281250803136
+      pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_27: 1138824809361227938
+      pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_28: 3546274931879734361
+      pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_29: -5532290973615618705
+      pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_3: -7743757580095066044
+      pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_30: -980717239444533610
+      pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_31: 1296477671321144991
+      pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_32: -5567196404038955526
+      pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_4: -4647030446282995877
+      pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_5: -835576849129893941
+      pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_6: -1488878100038828992
+      pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_7: -3354320156826807564
+      pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_8: -2043508926209621653
+      pngtree-black-cute-pixel-art-text-box-session-bubble-png-image_6253199_9: -5165360391668710790
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
