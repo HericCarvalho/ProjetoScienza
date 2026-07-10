@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3496231568465640313}
   - component: {fileID: 765717474795611477}
   m_Layer: 0
-  m_Name: Circle
+  m_Name: direita
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 2123012890047171484}
   - component: {fileID: 7170595795937727921}
   m_Layer: 0
-  m_Name: Circle (2)
+  m_Name: centro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -193,7 +193,7 @@ GameObject:
   - component: {fileID: 6075384733003052843}
   - component: {fileID: 2456063232414981606}
   m_Layer: 0
-  m_Name: Circle (1)
+  m_Name: esquerda
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -287,7 +287,7 @@ GameObject:
   - component: {fileID: 6302573045330634863}
   - component: {fileID: 6950920177131606977}
   m_Layer: 0
-  m_Name: "Pe\xE7a_1"
+  m_Name: "Pe\xE7a_0"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
