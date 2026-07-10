@@ -5,6 +5,9 @@ public class TabuleiroManager : MonoBehaviour
 {
     public static TabuleiroManager Instancia { get; private set; }
 
+    [Header("Contabilidade do Jogo")]
+    public int totalSobreposicoesSimbolos = 0;
+
     [Header("Configuracoes do Grid Triangular")]
     public int tamanhoBaseTopo = 6;
     public float tamanhoCirculo = 0.6f;
@@ -86,6 +89,7 @@ public class TabuleiroManager : MonoBehaviour
     {
         List<NoGrid> nosAlvos = new List<NoGrid>();
 
+        // Mapeamento das posições
         foreach (var sub in peca.circulosDaPeca)
         {
             int alvoX = noCentro.x + sub.posicaoRelativa.x;
@@ -94,56 +98,36 @@ public class TabuleiroManager : MonoBehaviour
 
             if (!dicionarioGrid.ContainsKey(coordenadaAlvo))
             {
-                Debug.LogWarning("[BLOQUEADO] A peça sairia para fora dos limites do tabuleiro.");
+                Debug.LogWarning("[BLOQUEADO] Fora dos limites do tabuleiro.");
                 return false;
             }
-
             nosAlvos.Add(dicionarioGrid[coordenadaAlvo]);
         }
 
+        // Validação de regras do jogo
         bool jogoJaComecou = TotalNosOcupados() > 1;
         bool encostouEmPecaAtiva = false;
 
-        if (!jogoJaComecou && noCentro.name != "No_Col_0_Lin_5")
-        {
-            Debug.LogWarning("[BLOQUEADO] O jogo deve começar obrigatoriamente na ponta inferior (No_Col_0_Lin_5)!");
-            return false;
-        }
+        if (!jogoJaComecou && noCentro.name != "No_Col_0_Lin_5") return false;
 
-        if (noCentro.name == "No_Col_0_Lin_5" || noCentro.estaOcupado)
-        {
-            encostouEmPecaAtiva = true;
-        }
-
+        if (noCentro.name == "No_Col_0_Lin_5" || noCentro.estaOcupado) encostouEmPecaAtiva = true;
         foreach (NoGrid no in nosAlvos)
         {
-            if (no.estaOcupado)
-            {
-                encostouEmPecaAtiva = true;
-            }
+            if (no.estaOcupado) encostouEmPecaAtiva = true;
         }
 
-        if (!encostouEmPecaAtiva)
-        {
-            Debug.LogWarning("[BLOQUEADO] A peça precisa se conectar a uma parte ativa do tabuleiro.");
-            return false;
-        }
+        if (!encostouEmPecaAtiva) return false;
 
+        // Checagem de sobreposição de símbolos
         for (int i = 0; i < peca.circulosDaPeca.Length; i++)
         {
-            var partePeca = peca.circulosDaPeca[i];
-            NoGrid noTabuleiro = nosAlvos[i];
-
-            if (noTabuleiro.simboloAtual != TipoSimbolo.Nenhum)
+            if (nosAlvos[i].simboloAtual != TipoSimbolo.Nenhum && nosAlvos[i].simboloAtual != peca.circulosDaPeca[i].simbolo)
             {
-                if (noTabuleiro.simboloAtual != partePeca.simbolo)
-                {
-                    Debug.LogWarning($"[BLOQUEADO] Erro de correspondência em {noTabuleiro.name}. Tabuleiro: {noTabuleiro.simboloAtual}, Peça: {partePeca.simbolo}");
-                    return false;
-                }
+                return false;
             }
         }
 
+        // Executa a colocação da peça no tabuleiro
         peca.transform.position = noCentro.transform.position;
         peca.foiPosicionada = true;
 
@@ -151,24 +135,50 @@ public class TabuleiroManager : MonoBehaviour
 
         for (int i = 0; i < peca.circulosDaPeca.Length; i++)
         {
-            if (nosAlvos[i].estaOcupado && nosAlvos[i].simboloAtual == peca.circulosDaPeca[i].simbolo)
+            // Se bateu o símbolo ou se o nó no chão já era dourado de antes
+            if ((nosAlvos[i].simboloAtual == peca.circulosDaPeca[i].simbolo && nosAlvos[i].simboloAtual != TipoSimbolo.Nenhum) || nosAlvos[i].jaEstaDourado)
             {
                 indicesQueSobrepuseram.Add(i);
             }
+            else if (nosAlvos[i].name == "No_Col_0_Lin_5" && !jogoJaComecou)
+            {
+                indicesQueSobrepuseram.Add(i);
+            }
+        }
 
+        // Atualização dos nós do tabuleiro com os símbolos da peça
+        for (int i = 0; i < peca.circulosDaPeca.Length; i++)
+        {
             nosAlvos[i].simboloAtual = peca.circulosDaPeca[i].simbolo;
             nosAlvos[i].estaOcupado = true;
+            if (indicesQueSobrepuseram.Contains(i))
+            {
+                nosAlvos[i].jaEstaDourado = true;
+            }
         }
+
+        // Contabilização de sobreposições e atualização do UI
+        if (indicesQueSobrepuseram.Count > 0)
+        {
+            totalSobreposicoesSimbolos += indicesQueSobrepuseram.Count;
+            Debug.Log($"[CONTADOR] +{indicesQueSobrepuseram.Count} sobreposições nesta rodada. Total Acumulado do Jogo: {totalSobreposicoesSimbolos}");
+
+            if (ControladorUI.Instancia != null)
+            {
+                ControladorUI.Instancia.AtualizarTextoContador(totalSobreposicoesSimbolos);
+            }
+        }
+        //Feedback visual da peça dourada
         PecaFeedback feedback = peca.GetComponent<PecaFeedback>();
         if (feedback != null && indicesQueSobrepuseram.Count > 0)
         {
+            feedback.Invoke("GarantirCorDourada", 0.02f);
             feedback.AplicarBrilhoDourado(indicesQueSobrepuseram);
         }
 
-        Debug.Log($"[SUCESSO] Peça posicionada corretamente em: {noCentro.name}");
         return true;
+   
     }
-
     private int TotalNosOcupados()
     {
         int count = 0;
@@ -177,5 +187,20 @@ public class TabuleiroManager : MonoBehaviour
             if (no.estaOcupado) count++;
         }
         return count;
+    }
+    public int ObterTotalSobreposicoes()
+    {
+        return totalSobreposicoesSimbolos;
+    }
+
+    public void ResetarContadorSobreposicoes()
+    {
+        totalSobreposicoesSimbolos = 0;
+
+        // Zera o texto na tela ao reiniciar
+        if (ControladorUI.Instancia != null)
+        {
+            ControladorUI.Instancia.AtualizarTextoContador(0);
+        }
     }
 }
