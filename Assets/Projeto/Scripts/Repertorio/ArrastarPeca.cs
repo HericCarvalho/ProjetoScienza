@@ -40,14 +40,26 @@ public class ArrastarPeca : MonoBehaviour, IPointerDownHandler, IDragHandler, IP
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        if (peca != null && peca.foiPosicionada) return;
+        if (peca == null)
+        {
+            peca = GetComponent<PecaDomino>();
+            if (peca == null) peca = GetComponentInParent<PecaDomino>();
+        }
 
-        
+        if (peca == null)
+        {
+            Debug.LogError("ERRO: O script ArrastarPeca não encontrou o componente PecaDomino neste objeto!");
+            return;
+        }
+
+        if (peca.foiPosicionada) return;
+
         NoGrid noMaisProximo = TabuleiroManager.Instancia.ObterNoMaisProximo(transform.position, distanciaMinimaEncaixe);
 
         if (noMaisProximo != null)
         {
-            Debug.Log("No encontrado perto do soltar: " + noMaisProximo.name);
+            Debug.Log("Nó encontrado perto do soltar: " + noMaisProximo.name);
+
             bool encaixou = TabuleiroManager.Instancia.TentarPosicionarPeca(peca, noMaisProximo);
 
             if (!encaixou)
@@ -57,7 +69,6 @@ public class ArrastarPeca : MonoBehaviour, IPointerDownHandler, IDragHandler, IP
         }
         else
         {
-            // Se o mouse estiver alem da distancia configurada, ela volta direto para a mao
             Debug.LogWarning("Soltou longe demais do grid!");
             transform.position = posicaoOriginal;
         }
