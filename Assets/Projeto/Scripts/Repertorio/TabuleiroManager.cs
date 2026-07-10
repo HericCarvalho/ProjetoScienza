@@ -6,12 +6,12 @@ public class TabuleiroManager : MonoBehaviour
     public static TabuleiroManager Instancia { get; private set; }
 
     [Header("Configuracoes do Grid Triangular")]
-    public int tamanhoBaseTopo = 6; // Define o n�mero de c�rculos que a linha mais larga
-    public float tamanhoCirculo = 0.6f; // Define o di�metro/tamanho que cada c�rculo ter� no mundo do jogo
+    public int tamanhoBaseTopo = 6;
+    public float tamanhoCirculo = 0.6f;
 
     [Header("Prefabs")]
     public GameObject prefabNoGrid;
-    public TipoSimbolo simboloInicial = TipoSimbolo.Triangulo; // Define o simbolo inicial do tabuleiro
+    public TipoSimbolo simboloInicial = TipoSimbolo.Triangulo;
 
     private Dictionary<Vector2Int, NoGrid> dicionarioGrid = new Dictionary<Vector2Int, NoGrid>();
 
@@ -51,11 +51,13 @@ public class TabuleiroManager : MonoBehaviour
                 NoGrid noScript = novoNoObj.GetComponent<NoGrid>();
                 noScript.x = x;
                 noScript.y = y;
+                noScript.simboloAtual = TipoSimbolo.Nenhum;
+                noScript.estaOcupado = false;
 
-                // Se o seu tamanhoBaseTopo for 6, a ultima linha e a 5.
                 if (y == tamanhoBaseTopo - 1 && x == 0)
                 {
                     noScript.simboloAtual = simboloInicial;
+                    noScript.estaOcupado = true;
                 }
 
                 dicionarioGrid.Add(new Vector2Int(x, y), noScript);
@@ -80,64 +82,100 @@ public class TabuleiroManager : MonoBehaviour
         return noMaisProximo;
     }
 
-    // Valida se a peca pode ser colocada de acordo com as regras de adjacencia e simbolos
     public bool TentarPosicionarPeca(PecaDomino peca, NoGrid noCentro)
     {
         List<NoGrid> nosAlvos = new List<NoGrid>();
-        bool encostouEmPecaExistente = false;
-        bool simboloBateuComSucesso = false;
 
-        // Mapeia e valida as posicoes das pontas da peca
         foreach (var sub in peca.circulosDaPeca)
         {
             int alvoX = noCentro.x + sub.posicaoRelativa.x;
             int alvoY = noCentro.y + sub.posicaoRelativa.y;
-
             Vector2Int coordenadaAlvo = new Vector2Int(alvoX, alvoY);
 
-            // Se alguma parte essencial da peca ficar fora do grid do triangulo, cancela
-            if (!dicionarioGrid.ContainsKey(coordenadaAlvo)) return false;
-
-            NoGrid noAlvo = dicionarioGrid[coordenadaAlvo];
-
-            // Checa as pecas ja existentes no tabuleiro
-            if (noAlvo.estaOcupado)
+            if (!dicionarioGrid.ContainsKey(coordenadaAlvo))
             {
-                encostouEmPecaExistente = true; // Achou uma peca colocada ali
-
-                if (noAlvo.simboloAtual == sub.simbolo)
-                {
-                    simboloBateuComSucesso = true; // O simbolo da peca e igual ao do tabuleiro
-                }
-                else
-                {
-                    Debug.LogWarning("Bloqueado: O simbolo " + sub.simbolo + " nao bate com " + noAlvo.simboloAtual);
-                    return false; // Simbolos diferentes quebram a jogada
-                }
+                Debug.LogWarning("[BLOQUEADO] A peça sairia para fora dos limites do tabuleiro.");
+                return false;
             }
 
-            nosAlvos.Add(noAlvo);
+            nosAlvos.Add(dicionarioGrid[coordenadaAlvo]);
         }
 
-        // A peca obrigatoriamente precisa encostar em alguma peca que ja estava no tabuleiro e o simbolo sobreposto precisa ser valido.
-        if (encostouEmPecaExistente && simboloBateuComSucesso)
+        bool jogoJaComecou = TotalNosOcupados() > 1;
+        bool encostouEmPecaAtiva = false;
+
+        if (!jogoJaComecou && noCentro.name != "No_Col_0_Lin_5")
         {
-
-            // Fixa a peca na posicao
-            peca.transform.position = noCentro.transform.position;
-            peca.foiPosicionada = true;
-
-            // Grava os novos simbolos no tabuleiro para as proximas pecas usarem
-            for (int i = 0; i < peca.circulosDaPeca.Length; i++)
-            {
-                nosAlvos[i].simboloAtual = peca.circulosDaPeca[i].simbolo;
-            }
-
-            Debug.Log("Jogada Valida! Peca fixada.");
-            return true;
+            Debug.LogWarning("[BLOQUEADO] O jogo deve começar obrigatoriamente na ponta inferior (No_Col_0_Lin_5)!");
+            return false;
         }
 
-        Debug.LogWarning("Jogada Invalida: Voce tentou colocar a peca isolada do resto do tabuleiro!");
-        return false;
+        if (noCentro.name == "No_Col_0_Lin_5" || noCentro.estaOcupado)
+        {
+            encostouEmPecaAtiva = true;
+        }
+
+        foreach (NoGrid no in nosAlvos)
+        {
+            if (no.estaOcupado)
+            {
+                encostouEmPecaAtiva = true;
+            }
+        }
+
+        if (!encostouEmPecaAtiva)
+        {
+            Debug.LogWarning("[BLOQUEADO] A peça precisa se conectar a uma parte ativa do tabuleiro.");
+            return false;
+        }
+
+        for (int i = 0; i < peca.circulosDaPeca.Length; i++)
+        {
+            var partePeca = peca.circulosDaPeca[i];
+            NoGrid noTabuleiro = nosAlvos[i];
+
+            if (noTabuleiro.simboloAtual != TipoSimbolo.Nenhum)
+            {
+                if (noTabuleiro.simboloAtual != partePeca.simbolo)
+                {
+                    Debug.LogWarning($"[BLOQUEADO] Erro de correspondência em {noTabuleiro.name}. Tabuleiro: {noTabuleiro.simboloAtual}, Peça: {partePeca.simbolo}");
+                    return false;
+                }
+            }
+        }
+
+        peca.transform.position = noCentro.transform.position;
+        peca.foiPosicionada = true;
+
+        List<int> indicesQueSobrepuseram = new List<int>();
+
+        for (int i = 0; i < peca.circulosDaPeca.Length; i++)
+        {
+            if (nosAlvos[i].estaOcupado && nosAlvos[i].simboloAtual == peca.circulosDaPeca[i].simbolo)
+            {
+                indicesQueSobrepuseram.Add(i);
+            }
+
+            nosAlvos[i].simboloAtual = peca.circulosDaPeca[i].simbolo;
+            nosAlvos[i].estaOcupado = true;
+        }
+        PecaFeedback feedback = peca.GetComponent<PecaFeedback>();
+        if (feedback != null && indicesQueSobrepuseram.Count > 0)
+        {
+            feedback.AplicarBrilhoDourado(indicesQueSobrepuseram);
+        }
+
+        Debug.Log($"[SUCESSO] Peça posicionada corretamente em: {noCentro.name}");
+        return true;
+    }
+
+    private int TotalNosOcupados()
+    {
+        int count = 0;
+        foreach (var no in dicionarioGrid.Values)
+        {
+            if (no.estaOcupado) count++;
+        }
+        return count;
     }
 }
