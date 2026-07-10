@@ -20,6 +20,8 @@ public class ArrastarPeca : MonoBehaviour, IPointerDownHandler, IDragHandler, IP
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        if (TabuleiroManager.Instancia != null && TabuleiroManager.Instancia.turnoAtual != TabuleiroManager.EstadoTurno.Jogador) return;
+
         if (peca != null && peca.foiPosicionada) return;
 
         posicaoOriginal = transform.position;
@@ -31,6 +33,8 @@ public class ArrastarPeca : MonoBehaviour, IPointerDownHandler, IDragHandler, IP
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (TabuleiroManager.Instancia != null && TabuleiroManager.Instancia.turnoAtual != TabuleiroManager.EstadoTurno.Jogador) return;
+
         if (peca != null && peca.foiPosicionada) return;
 
         Vector3 posicaoMouse = cam.ScreenToWorldPoint(eventData.position);
@@ -40,6 +44,12 @@ public class ArrastarPeca : MonoBehaviour, IPointerDownHandler, IDragHandler, IP
 
     public void OnPointerUp(PointerEventData eventData)
     {
+        if (TabuleiroManager.Instancia != null && TabuleiroManager.Instancia.turnoAtual != TabuleiroManager.EstadoTurno.Jogador)
+        {
+            transform.position = posicaoOriginal;
+            return;
+        }
+
         if (peca == null)
         {
             peca = GetComponent<PecaDomino>();

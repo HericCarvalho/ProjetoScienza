@@ -5,6 +5,13 @@ public class TabuleiroManager : MonoBehaviour
 {
     public static TabuleiroManager Instancia { get; private set; }
 
+    public enum EstadoTurno { Jogador, Inimigo, Transicao }
+
+    [Header("Sistema de Turnos")]
+    public EstadoTurno turnoAtual = EstadoTurno.Jogador;
+    public int jogadasDoJogador = 0;
+    public int maximoJogadasPorTurno = 4;
+
     [Header("Contabilidade do Jogo")]
     public int totalSobreposicoesSimbolos = 0;
 
@@ -24,6 +31,14 @@ public class TabuleiroManager : MonoBehaviour
         else Destroy(gameObject);
 
         GerarTabuleiroTriangular();
+    }
+
+    void Start()
+    {
+        if (TemporizadorJogo.Instancia != null)
+        {
+            TemporizadorJogo.Instancia.IniciarTemporizador();
+        }
     }
 
     private void GerarTabuleiroTriangular()
@@ -87,9 +102,10 @@ public class TabuleiroManager : MonoBehaviour
 
     public bool TentarPosicionarPeca(PecaDomino peca, NoGrid noCentro)
     {
+        if (turnoAtual != EstadoTurno.Jogador) return false;
+
         List<NoGrid> nosAlvos = new List<NoGrid>();
 
-        // Mapeamento das posições
         foreach (var sub in peca.circulosDaPeca)
         {
             int alvoX = noCentro.x + sub.posicaoRelativa.x;
@@ -104,7 +120,6 @@ public class TabuleiroManager : MonoBehaviour
             nosAlvos.Add(dicionarioGrid[coordenadaAlvo]);
         }
 
-        // Validação de regras do jogo
         bool jogoJaComecou = TotalNosOcupados() > 1;
         bool encostouEmPecaAtiva = false;
 
@@ -118,7 +133,6 @@ public class TabuleiroManager : MonoBehaviour
 
         if (!encostouEmPecaAtiva) return false;
 
-        // Checagem de sobreposição de símbolos
         for (int i = 0; i < peca.circulosDaPeca.Length; i++)
         {
             if (nosAlvos[i].simboloAtual != TipoSimbolo.Nenhum && nosAlvos[i].simboloAtual != peca.circulosDaPeca[i].simbolo)
@@ -127,7 +141,6 @@ public class TabuleiroManager : MonoBehaviour
             }
         }
 
-        // Executa a colocação da peça no tabuleiro
         peca.transform.position = noCentro.transform.position;
         peca.foiPosicionada = true;
 
@@ -135,7 +148,6 @@ public class TabuleiroManager : MonoBehaviour
 
         for (int i = 0; i < peca.circulosDaPeca.Length; i++)
         {
-            // Se bateu o símbolo ou se o nó no chão já era dourado de antes
             if ((nosAlvos[i].simboloAtual == peca.circulosDaPeca[i].simbolo && nosAlvos[i].simboloAtual != TipoSimbolo.Nenhum) || nosAlvos[i].jaEstaDourado)
             {
                 indicesQueSobrepuseram.Add(i);
@@ -146,7 +158,6 @@ public class TabuleiroManager : MonoBehaviour
             }
         }
 
-        // Atualização dos nós do tabuleiro com os símbolos da peça
         for (int i = 0; i < peca.circulosDaPeca.Length; i++)
         {
             nosAlvos[i].simboloAtual = peca.circulosDaPeca[i].simbolo;
@@ -157,7 +168,6 @@ public class TabuleiroManager : MonoBehaviour
             }
         }
 
-        // Contabilização de sobreposições e atualização do UI
         if (indicesQueSobrepuseram.Count > 0)
         {
             totalSobreposicoesSimbolos += indicesQueSobrepuseram.Count;
@@ -168,7 +178,7 @@ public class TabuleiroManager : MonoBehaviour
                 ControladorUI.Instancia.AtualizarTextoContador(totalSobreposicoesSimbolos);
             }
         }
-        //Feedback visual da peça dourada
+
         PecaFeedback feedback = peca.GetComponent<PecaFeedback>();
         if (feedback != null && indicesQueSobrepuseram.Count > 0)
         {
@@ -176,9 +186,39 @@ public class TabuleiroManager : MonoBehaviour
             feedback.AplicarBrilhoDourado(indicesQueSobrepuseram);
         }
 
+        jogadasDoJogador++;
+        if (jogadasDoJogador >= maximoJogadasPorTurno)
+        {
+            PassarRodadaParaInimigo();
+        }
+
         return true;
-   
     }
+
+    public void PassarRodadaParaInimigo()
+    {
+        if (turnoAtual != EstadoTurno.Jogador) return;
+
+        if (TemporizadorJogo.Instancia != null) TemporizadorJogo.Instancia.PararTemporizador();
+
+        turnoAtual = EstadoTurno.Transicao;
+        Debug.Log("[TURNO] Turno do jogador encerrado. Iniciando turno do inimigo...");
+
+        Invoke("SimularFimTurnoInimigo", 2.0f);
+    }
+
+    private void SimularFimTurnoInimigo()
+    {
+        jogadasDoJogador = 0;
+        turnoAtual = EstadoTurno.Jogador;
+        Debug.Log("[TURNO] Seu turno recomeçou!");
+
+        if (TemporizadorJogo.Instancia != null)
+        {
+            TemporizadorJogo.Instancia.IniciarTemporizador();
+        }
+    }
+
     private int TotalNosOcupados()
     {
         int count = 0;
@@ -188,6 +228,7 @@ public class TabuleiroManager : MonoBehaviour
         }
         return count;
     }
+
     public int ObterTotalSobreposicoes()
     {
         return totalSobreposicoesSimbolos;
@@ -196,8 +237,6 @@ public class TabuleiroManager : MonoBehaviour
     public void ResetarContadorSobreposicoes()
     {
         totalSobreposicoesSimbolos = 0;
-
-        // Zera o texto na tela ao reiniciar
         if (ControladorUI.Instancia != null)
         {
             ControladorUI.Instancia.AtualizarTextoContador(0);

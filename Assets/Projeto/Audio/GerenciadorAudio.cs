@@ -56,7 +56,6 @@ public class GerenciadorAudio : MonoBehaviour
     public void TocarSFXNoObjeto(AudioClip sfx, Vector3 posicao, float volume = 1f)
     {
         if (sfx == null) return;
-        // Cria um AudioSource temporário em 3D que se auto-destrói ao acabar o som
         AudioSource.PlayClipAtPoint(sfx, posicao, volume);
     }
 
@@ -77,7 +76,7 @@ public class GerenciadorAudio : MonoBehaviour
 
     private float ConverterParaDecibel(float valorLinear)
     {
-        valorLinear = Mathf.Clamp(valorLinear, 0.0001f, 1f); // Evita log de zero
+        valorLinear = Mathf.Clamp(valorLinear, 0.0001f, 1f);
         return Mathf.Log10(valorLinear) * 20;
     }
 }
