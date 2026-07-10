@@ -13,6 +13,8 @@ public class Dialogo : MonoBehaviour
     [SerializeField] private GameObject dialoguePanel;
     [SerializeField] private GameObject questPanel;
     [SerializeField] private PlayerMovement playerMovement;
+    [SerializeField] private string diaologue;
+    [SerializeField] private bool hideDialogue = true;
 
     private Coroutine typingCoroutine;
     private string currentFullText = "";
@@ -21,7 +23,7 @@ public class Dialogo : MonoBehaviour
     // Property to check if text is currently animating
     public bool IsTyping { get; private set; }
 
-    void Start() { ShowDialogue("Chapei, to atrasado pra parada. Pior que não sei nada sobre essa batalha. Eu deveria pegar umas referências da estação pra usar contra o cara."); }
+    void Start() { ShowDialogue(diaologue); }
     private void Awake()
     {
         if (dialogueText == null)
@@ -132,20 +134,27 @@ public class Dialogo : MonoBehaviour
 
         if (hideCoroutine != null)
             StopCoroutine(hideCoroutine);
+
+        
         hideCoroutine = StartCoroutine(HideAfterDelay());
     }
-
+    
     private IEnumerator HideAfterDelay()
     {
         yield return new WaitForSeconds(hideDelay);
 
-        if (dialoguePanel != null)
-            dialoguePanel.SetActive(false);
+        if (hideDialogue)
+        {
+            if (dialoguePanel != null)
+                dialoguePanel.SetActive(false);
 
-        if (questPanel != null)
-            questPanel.SetActive(true);
+            if (questPanel != null)
+                questPanel.SetActive(true);
 
-        playerMovement.enabled = true; // Re-enable player movement after dialog is hidden        
+            if (playerMovement != null)
+                playerMovement.enabled = true; // Re-enable player movement after dialog is hidden
+        }
+
         hideCoroutine = null;
     }
 }
