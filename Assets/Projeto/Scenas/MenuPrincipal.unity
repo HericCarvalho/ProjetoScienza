@@ -172,8 +172,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.13825, y: -0.20215002, z: 0}
-    m_Extent: {x: 1.65655, y: 0.57855, z: 0}
+    m_Center: {x: 0.118150055, y: -0.24059999, z: 0}
+    m_Extent: {x: 1.72915, y: 0.855, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -184,10 +184,10 @@ MonoBehaviour:
   m_ShapeLightFalloffSize: 0.21
   m_ShapeLightFalloffOffset: {x: 0, y: 0}
   m_ShapePath:
-  - {x: -1.3029461, y: -0.5705708, z: 0}
-  - {x: 1.5847683, y: -0.3265561, z: 0}
-  - {x: 1.5692768, y: 0.16615486, z: 0}
-  - {x: -1.3076429, y: -0.04040003, z: 0}
+  - {x: -1.3795371, y: -0.88499606, z: 0}
+  - {x: 1.6371725, y: -0.7296654, z: 0}
+  - {x: 1.6257122, y: 0.40398943, z: 0}
+  - {x: -1.4003582, y: 0.24177659, z: 0}
 --- !u!4 &61397183
 Transform:
   m_ObjectHideFlags: 0
@@ -1238,7 +1238,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1859701500
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1278,7 +1278,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "A batalha ic\xF4nica da esta\xE7\xE3o "
+  m_text: "A Batalha Ic\xF4nica da Esta\xE7\xE3o "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 76191763a3940c741ab5ad08738eace8, type: 2}
   m_sharedMaterial: {fileID: -2727331651744978605, guid: 76191763a3940c741ab5ad08738eace8, type: 2}

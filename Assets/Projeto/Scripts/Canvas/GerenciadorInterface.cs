@@ -16,6 +16,7 @@ public class GerenciadorInterface : MonoBehaviour
     public TextMeshProUGUI textoNotificacao;
     public Image iconeNotificacao;
     public float tempoExibicaoNotificacao = 2.5f;
+    
 
     [Header("Indicador de Intera��o [E]")]
     public CanvasGroup grupoIndicadorE; 
@@ -31,7 +32,7 @@ public class GerenciadorInterface : MonoBehaviour
     private Coroutine coroutineNotificacao;
     private Coroutine coroutineMenu;
     private Coroutine coroutineFadeE;
-
+    
     void Awake()
     {
         if (Instancia == null) Instancia = this;
@@ -148,6 +149,7 @@ public class GerenciadorInterface : MonoBehaviour
 
     private IEnumerator FluxoNotificacao(string nomeDoItem, Sprite spriteDoIcone)
     {
+        
         textoNotificacao.text = $"Você encontrou: {nomeDoItem}!";
 
         if (spriteDoIcone != null && iconeNotificacao != null)

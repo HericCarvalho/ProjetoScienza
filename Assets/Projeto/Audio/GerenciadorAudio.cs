@@ -5,10 +5,10 @@ public class GerenciadorAudio : MonoBehaviour
 {
     public static GerenciadorAudio Instancia { get; private set; }
 
-    [Header("Configuração do Mixer")]
+    [Header("Configuraï¿½ï¿½o do Mixer")]
     [SerializeField] private AudioMixer mixerGlobal;
 
-    [Header("Fontes de Áudio Fixas")]
+    [Header("Fontes de ï¿½udio Fixas")]
     [SerializeField] private AudioSource fonteMusica;
     [SerializeField] private AudioSource fonteAmbiente;
     [SerializeField] private AudioSource fonteSFX2D;
@@ -78,5 +78,9 @@ public class GerenciadorAudio : MonoBehaviour
     {
         valorLinear = Mathf.Clamp(valorLinear, 0.0001f, 1f);
         return Mathf.Log10(valorLinear) * 20;
+    }
+    public void TocarMusicaMesmo()
+    {
+        TocarMusica(fonteMusica.clip, fonteMusica.loop);
     }
 }
