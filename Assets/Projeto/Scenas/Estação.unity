@@ -9655,6 +9655,143 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Paralaxe
   speed: 3
+--- !u!1 &287203862
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 287203865}
+  - component: {fileID: 287203864}
+  - component: {fileID: 287203863}
+  m_Layer: 5
+  m_Name: Text (TMP) (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &287203863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 287203862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: 
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 76191763a3940c741ab5ad08738eace8, type: 2}
+  m_sharedMaterial: {fileID: -2727331651744978605, guid: 76191763a3940c741ab5ad08738eace8, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 50
+  m_fontSizeBase: 50
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 8
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_characterHorizontalScale: 1
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 86.147766, z: 0, w: 599.4444}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &287203864
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 287203862}
+  m_CullTransparentMesh: 1
+--- !u!224 &287203865
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 287203862}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 719505328}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -749}
+  m_SizeDelta: {x: 1572.2977, y: 787.4933}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &291993541
 GameObject:
   m_ObjectHideFlags: 0
@@ -16535,6 +16672,62 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Paralaxe
   speed: 3
+--- !u!1 &423177414
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 423177415}
+  - component: {fileID: 423177416}
+  m_Layer: 5
+  m_Name: Dialogue manager (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &423177415
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 423177414}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 719505328}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &423177416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 423177414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bf45de42d38d254397e42d3f20e5e35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Dialogo
+  dialogueText: {fileID: 287203863}
+  timePerCharacter: 0.06
+  hideDelay: 4
+  dialoguePanel: {fileID: 0}
+  questPanel: {fileID: 0}
+  playerMovement: {fileID: 0}
+  diaologue: CP2.302, circa 1895
+  hideDialogue: 0
 --- !u!1 &431932932
 GameObject:
   m_ObjectHideFlags: 0
@@ -18778,7 +18971,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 4.947998, y: 30.100098}
+  m_AnchoredPosition: {x: 4.947998, y: 57.6}
   m_SizeDelta: {x: 704.6912, y: 100.3042}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &499454159
@@ -18801,8 +18994,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Chapei, to atrasado pra parada. Pior que n\xE3o sei nada sobre essa batalha.
-    Eu deveria pegar umas refer\xEAncias da esta\xE7\xE3o pra usar contra o cara."
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 76191763a3940c741ab5ad08738eace8, type: 2}
   m_sharedMaterial: {fileID: -2727331651744978605, guid: 76191763a3940c741ab5ad08738eace8, type: 2}
@@ -18829,14 +19021,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 34.44
-  m_fontSizeBase: 34.44
+  m_fontSize: 34
+  m_fontSizeBase: 34
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 8
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -18868,7 +19060,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: -24.734863, y: 0, z: -22.265137, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -22706,7 +22898,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cb6015a38ea2b643b0acd683e860ce9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GerenciadorAudio
-  mixerGlobal: {fileID: 24100000, guid: f22577d0165acae4d950028a3660eb9d, type: 2}
+  mixerGlobal: {fileID: 24100000, guid: dc9fe3f084fd73f4e841fe732642c0e8, type: 2}
   fonteMusica: {fileID: 633411318}
   fonteAmbiente: {fileID: 633411320}
   fonteSFX2D: {fileID: 633411319}
@@ -25562,6 +25754,43 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &719505327
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 719505328}
+  m_Layer: 5
+  m_Name: Texto 2 (7)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &719505328
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 719505327}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 287203865}
+  - {fileID: 423177415}
+  m_Father: {fileID: 884511824}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1572.2977, y: 787.4933}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &723593940
 GameObject:
   m_ObjectHideFlags: 0
@@ -26246,6 +26475,8 @@ PlayableDirector:
     value: {fileID: 1892860577}
   - key: {fileID: -6671553872250568958, guid: 0bd9f5dc1d8fec949a4e235a219260a6, type: 2}
     value: {fileID: 84975855}
+  - key: {fileID: 5449933176285802133, guid: 0bd9f5dc1d8fec949a4e235a219260a6, type: 2}
+    value: {fileID: 719505327}
   m_ExposedReferences:
     m_References: []
 --- !u!4 &746395174
@@ -30413,8 +30644,7 @@ MonoBehaviour:
   dialoguePanel: {fileID: 0}
   questPanel: {fileID: 0}
   playerMovement: {fileID: 0}
-  diaologue: "Charles Sanders Peirce (1839-1914), fil\xF3sofo e semioticista CP2.302,
-    circa 1895"
+  diaologue: "Charles Sanders Peirce (1839-1914), fil\xF3sofo e semioticista  "
   hideDialogue: 0
 --- !u!1 &850934300
 GameObject:
@@ -31654,6 +31884,7 @@ RectTransform:
   - {fileID: 901334542}
   - {fileID: 1304780021}
   - {fileID: 1892860578}
+  - {fileID: 719505328}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -61477,13 +61708,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Dialogo
   dialogueText: {fileID: 499454159}
   timePerCharacter: 0.03
-  hideDelay: 2
+  hideDelay: 4
   dialoguePanel: {fileID: 1716313462}
   questPanel: {fileID: 2058143066}
   playerMovement: {fileID: 1518340452}
-  diaologue: "Chapei, to atrasado pra parada. Pior que n\xE3o sei nada sobre essa
-    batalha. Eu deveria pegar umas refer\xEAncias da esta\xE7\xE3o pra usar contra
-    o cara."
+  diaologue: "Chapei, to atrasado pra parada. Pior que n\xE3o sei nada sobre esse
+    lugar. Eu deveria pegar umas refer\xEAncias da esta\xE7\xE3o pra usar contra
+    o cara. Hm, aquele jornal parece ser um bom lugar para come\xE7ar."
   hideDialogue: 1
 --- !u!1 &1171005750
 GameObject:
@@ -76129,7 +76360,7 @@ Transform:
   m_GameObject: {fileID: 1442256460}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.82, y: 7.03, z: 0}
+  m_LocalPosition: {x: -15.076926, y: 10.053187, z: 0}
   m_LocalScale: {x: 1.5369691, y: 1.5369691, z: 1.5369691}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -79816,7 +80047,7 @@ Transform:
   m_GameObject: {fileID: 1532590030}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.7818465, w: 0.6234709}
-  m_LocalPosition: {x: 0.23, y: 7.56, z: 0}
+  m_LocalPosition: {x: -14.026926, y: 10.583187, z: 0}
   m_LocalScale: {x: 1.5369691, y: 1.5369691, z: 1.5369691}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -85975,6 +86206,16 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+  - first: {x: -10, y: -2, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 14
+      m_TileSpriteIndex: 2
+      m_TileMatrixIndex: 5
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
   - first: {x: -6, y: -2, z: 0}
     second:
       serializedVersion: 2
@@ -88575,7 +88816,7 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: a4992e0b47d4859439e1c0933cd72d78, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: ce37bf7c77c024b4fbf4cac5f03dd37a, type: 2}
-  - m_RefCount: 1
+  - m_RefCount: 2
     m_Data: {fileID: 11400000, guid: be2ce610b0647cb4b84ed707b927dbd9, type: 2}
   - m_RefCount: 19
     m_Data: {fileID: 11400000, guid: 8e27703a870817141bdafc1eb5038b13, type: 2}
@@ -88602,7 +88843,7 @@ Tilemap:
     m_Data: {fileID: -9125499224750454837, guid: 65b92c6f5269d664a9623dff14b05126, type: 3}
   - m_RefCount: 2
     m_Data: {fileID: -2880698386063754605, guid: 80f35b24fa93b40478a1758f092baa71, type: 3}
-  - m_RefCount: 3
+  - m_RefCount: 4
     m_Data: {fileID: 3836253311859218231, guid: 3f415c457dbf8e54f88a6f8287c58a92, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
@@ -88731,7 +88972,7 @@ Tilemap:
       e31: 0
       e32: 0
       e33: 1
-  - m_RefCount: 2
+  - m_RefCount: 3
     m_Data:
       e00: 0
       e01: 1
@@ -88804,7 +89045,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 510
+  - m_RefCount: 511
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
@@ -91053,8 +91294,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 187, y: 94}
-  m_SizeDelta: {x: 753, y: 187}
+  m_AnchoredPosition: {x: 220.53162, y: 125.36133}
+  m_SizeDelta: {x: 808.0743, y: 249.7228}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1716313464
 MonoBehaviour:
@@ -99757,7 +99998,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.07845229, y: -0.14982784}
+  m_Offset: {x: 0.11668146, y: -0.34031546}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -99767,7 +100008,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.3569046, y: 1.4067237}
+  m_Size: {x: 1.7471721, y: 1.787699}
   m_EdgeRadius: 0
 --- !u!212 &1915030803
 SpriteRenderer:
@@ -99837,7 +100078,7 @@ Transform:
   m_GameObject: {fileID: 1915030800}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -1042.714, y: -572.227, z: 0}
+  m_LocalPosition: {x: -1051.99, y: -570.26, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -108561,7 +108802,7 @@ Transform:
   m_GameObject: {fileID: 2122805554}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.45766687, w: 0.88912374}
-  m_LocalPosition: {x: -0.524, y: 7.642, z: 0}
+  m_LocalPosition: {x: -14.780926, y: 10.665188, z: 0}
   m_LocalScale: {x: 1.5369691, y: 1.5369691, z: 1.5369691}
   m_ConstrainProportionsScale: 0
   m_Children: []

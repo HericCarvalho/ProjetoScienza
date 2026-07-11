@@ -15,5 +15,5 @@ MonoBehaviour:
   idUnico: 10
   nomeExibicao: Totem
   descricaoDetalhada: 
-  iconeUI: {fileID: -424786971313601370, guid: d43dc37a6d2a43841adf59ea35c8efcd, type: 3}
+  iconeUI: {fileID: 3026585487058881260, guid: 41f731e4a8ccaf74e9131d955abf53dd, type: 3}
   prefabPecaDomino: {fileID: 8254161304950247519, guid: 50e33be25b3ec7a49bb3b4d34cde21cb, type: 3}

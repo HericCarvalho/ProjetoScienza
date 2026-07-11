@@ -15,5 +15,5 @@ MonoBehaviour:
   idUnico: 03
   nomeExibicao: "M\xFAsico"
   descricaoDetalhada: 
-  iconeUI: {fileID: 3330187476926645551, guid: d43dc37a6d2a43841adf59ea35c8efcd, type: 3}
+  iconeUI: {fileID: 19293891732474387, guid: 41f731e4a8ccaf74e9131d955abf53dd, type: 3}
   prefabPecaDomino: {fileID: 8254161304950247519, guid: 8193658ae32c8404aaee0cd0b5b9f418, type: 3}
