@@ -2,6 +2,13 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
+[System.Serializable]
+public struct ConfiguracaoSimbolo
+{
+    public TipoSimbolo tipo;
+    public Sprite imagem;
+}
+
 public class TabuleiroManager : MonoBehaviour
 {
     public static TabuleiroManager Instancia { get; private set; }
@@ -13,21 +20,34 @@ public class TabuleiroManager : MonoBehaviour
     public int jogadasDoJogador = 0;
     public int maximoJogadasPorTurno = 4;
 
+    [Header("Progressão de Turnos Globais")]
+    [Tooltip("O número do turno atual do jogo (começa em 1 e aumenta cada vez que o controle volta ao jogador).")]
+    public int numeroDoTurnoAtual = 1;
+
     [Header("Contabilidade do Jogo")]
-    public int totalSobreposicoesSimbolos = 0;   // Pontos do Jogador
-    public int totalSobreposicoesInimigo = 0;    // Pontos do Inimigo
+    public int totalSobreposicoesSimbolos = 0;
+    public int totalSobreposicoesInimigo = 0;
 
     [Header("Configuracoes do Grid Triangular")]
     public int tamanhoBaseTopo = 6;
-    public float tamanhoCirculo = 0.6f;
+    public float tamanhoCirculo = 1.0f;
 
     [Header("Prefabs")]
     public GameObject prefabNoGrid;
 
-    [Header("Configuração de Símbolo Inicial")]
-    public TipoSimbolo simboloInicial = TipoSimbolo.Triangulo;
-    [Tooltip("Nome do nó que se comporta como o ponto de partida do jogo.")]
+    [Header("Configuração de Símbolo Inicial por Rodada")]
+    [Tooltip("Coloque aqui a sequência de símbolos para cada turno. Elemento 0 = Turno 1, Elemento 1 = Turno 2, etc.")]
+    public List<TipoSimbolo> sequenciaSimbolosPorTurno = new List<TipoSimbolo>() { TipoSimbolo.Triangulo };
+
+    [HideInInspector] public TipoSimbolo simboloInicial; // Agora definido dinamicamente pela lista acima
     public string nomeNoInicial = "No_Col_0_Lin_5";
+
+    [Header("Banco de Imagens dos Símbolos")]
+    public List<ConfiguracaoSimbolo> bancoDeSimbolos;
+
+    [Header("Posicionamento do Tabuleiro")]
+    public Transform ancoragemTabuleiro;
+    public Vector2 offsetManual = Vector2.zero;
 
     private Dictionary<Vector2Int, NoGrid> dicionarioGrid = new Dictionary<Vector2Int, NoGrid>();
 
@@ -36,15 +56,42 @@ public class TabuleiroManager : MonoBehaviour
         if (Instancia == null) Instancia = this;
         else Destroy(gameObject);
 
+        // Define o primeiro símbolo antes de gerar o tabuleiro
+        AtualizarSimboloDoTurnoAtual();
         GerarTabuleiroTriangular();
     }
 
     void Start()
     {
-        if (TemporizadorJogo.Instancia != null)
+
+    }
+
+    // Método que descobre qual símbolo deve ser usado baseado no turno atual do jogo
+    private void AtualizarSimboloDoTurnoAtual()
+    {
+        if (sequenciaSimbolosPorTurno == null || sequenciaSimbolosPorTurno.Count == 0)
         {
-            TemporizadorJogo.Instancia.IniciarTemporizador();
+            simboloInicial = TipoSimbolo.Triangulo; // Fallback de segurança
+            return;
         }
+
+        // Garante que se o turno passar do tamanho da lista, ele não quebra (mantém o último ou repete)
+        int indice = numeroDoTurnoAtual - 1;
+        if (indice >= sequenciaSimbolosPorTurno.Count)
+        {
+            indice = sequenciaSimbolosPorTurno.Count - 1; // Mantém o último símbolo definido
+        }
+
+        simboloInicial = sequenciaSimbolosPorTurno[indice];
+    }
+
+    public Sprite ObterSpriteDoSimbolo(TipoSimbolo tipo)
+    {
+        foreach (ConfiguracaoSimbolo conf in bancoDeSimbolos)
+        {
+            if (conf.tipo == tipo) return conf.imagem;
+        }
+        return null;
     }
 
     private void GerarTabuleiroTriangular()
@@ -55,7 +102,9 @@ public class TabuleiroManager : MonoBehaviour
         float larguraTotalTopo = (tamanhoBaseTopo - 1) * tamanhoCirculo;
         float alturaTotal = (tamanhoBaseTopo - 1) * alturaHexagonal;
 
-        Vector3 offsetCentralizado = new Vector3(-larguraTotalTopo * 0.5f, alturaTotal * 0.5f, 0f);
+        Vector3 centroCalculado = new Vector3(-larguraTotalTopo * 0.5f, alturaTotal * 0.5f, 0f);
+        Vector3 pontoDeOrigem = (ancoragemTabuleiro != null) ? ancoragemTabuleiro.position : Vector3.zero;
+        Vector3 deslocamentoFinal = pontoDeOrigem + new Vector3(offsetManual.x, offsetManual.y, 0f);
 
         for (int y = 0; y < tamanhoBaseTopo; y++)
         {
@@ -67,7 +116,7 @@ public class TabuleiroManager : MonoBehaviour
                 float posX = (x * tamanhoCirculo) + deslocamentoX;
                 float posY = -y * alturaHexagonal;
 
-                Vector3 posicaoMundo = new Vector3(posX, posY, 0f) + offsetCentralizado;
+                Vector3 posicaoMundo = new Vector3(posX, posY, 0f) + centroCalculado + deslocamentoFinal;
 
                 GameObject novoNoObj = Instantiate(prefabNoGrid, posicaoMundo, Quaternion.identity, transform);
                 novoNoObj.name = $"No_Col_{x}_Lin_{y}";
@@ -75,13 +124,20 @@ public class TabuleiroManager : MonoBehaviour
                 NoGrid noScript = novoNoObj.GetComponent<NoGrid>();
                 noScript.x = x;
                 noScript.y = y;
-                noScript.simboloAtual = TipoSimbolo.Nenhum;
-                noScript.estaOcupado = false;
 
                 if (novoNoObj.name == nomeNoInicial)
                 {
-                    noScript.simboloAtual = simboloInicial;
                     noScript.estaOcupado = true;
+                    noScript.jaEstaDourado = false;
+
+                    Sprite spriteInicial = ObterSpriteDoSimbolo(simboloInicial);
+                    noScript.DefinirSimboloVisual(simboloInicial, spriteInicial);
+                }
+                else
+                {
+                    noScript.DefinirSimboloVisual(TipoSimbolo.Nenhum, null);
+                    noScript.estaOcupado = false;
+                    noScript.jaEstaDourado = false;
                 }
 
                 dicionarioGrid.Add(new Vector2Int(x, y), noScript);
@@ -92,13 +148,15 @@ public class TabuleiroManager : MonoBehaviour
     public void AlterarSimboloInicial(TipoSimbolo novoSimbolo)
     {
         simboloInicial = novoSimbolo;
+        Sprite novoSprite = ObterSpriteDoSimbolo(novoSimbolo);
+
         foreach (var no in dicionarioGrid.Values)
         {
             if (no.name == nomeNoInicial)
             {
-                no.simboloAtual = novoSimbolo;
                 no.estaOcupado = true;
                 no.jaEstaDourado = false;
+                no.DefinirSimboloVisual(novoSimbolo, novoSprite);
                 break;
             }
         }
@@ -126,22 +184,17 @@ public class TabuleiroManager : MonoBehaviour
         if (turnoAtual == EstadoTurno.Jogador)
         {
             totalSobreposicoesSimbolos += pontosGanhos;
-            if (ControladorUI.Instancia != null)
-                ControladorUI.Instancia.AtualizarTextoContador(totalSobreposicoesSimbolos);
         }
-        else // Se for turno do inimigo ou se estiver rodando o script simulado dele
+        else
         {
             totalSobreposicoesInimigo += pontosGanhos;
-            if (ControladorUI.Instancia != null)
-                ControladorUI.Instancia.AtualizarTextoContadorInimigo(totalSobreposicoesInimigo);
         }
     }
 
-    public bool TCanvasInimigo { get; set; } 
+    public bool TCanvasInimigo { get; set; }
 
     public bool TentarPosicionarPeca(PecaDomino peca, NoGrid noCentro)
     {
-        // Aceita a jogada se for o jogador OU se o script do inimigo estiver simulando no momento correto
         if (turnoAtual != EstadoTurno.Jogador && !peca.name.Contains("(Inimigo)")) return false;
 
         List<NoGrid> nosAlvos = new List<NoGrid>();
@@ -196,8 +249,10 @@ public class TabuleiroManager : MonoBehaviour
 
         for (int i = 0; i < peca.circulosDaPeca.Length; i++)
         {
-            nosAlvos[i].simboloAtual = peca.circulosDaPeca[i].simbolo;
+            Sprite spriteDoSimbolo = ObterSpriteDoSimbolo(peca.circulosDaPeca[i].simbolo);
+            nosAlvos[i].DefinirSimboloVisual(peca.circulosDaPeca[i].simbolo, spriteDoSimbolo);
             nosAlvos[i].estaOcupado = true;
+
             if (indicesQueSobrepuseram.Contains(i))
             {
                 nosAlvos[i].jaEstaDourado = true;
@@ -232,14 +287,15 @@ public class TabuleiroManager : MonoBehaviour
     {
         if (turnoAtual != EstadoTurno.Jogador) return;
 
-        if (TemporizadorJogo.Instancia != null) TemporizadorJogo.Instancia.PararTemporizador();
+        if (GerenciadorInterfaceTempo.Instancia != null) GerenciadorInterfaceTempo.Instancia.PararTemporizador();
 
-        turnoAtual = EstadoTurno.Inimigo; // Atualizado diretamente para Inimigo para o timer rodar
+        turnoAtual = EstadoTurno.Inimigo;
 
-        if (TemporizadorJogo.Instancia != null)
-        {
-            TemporizadorJogo.Instancia.IniciarTemporizador(); // Inicia o tempo do Inimigo
-        }
+        // Atualiza o texto para o Turno da Madu
+        if (GerenciadorInterfaceTempo.Instancia != null)
+            GerenciadorInterfaceTempo.Instancia.AtualizarTextoDeTurno(numeroDoTurnoAtual, false);
+
+        if (GerenciadorInterfaceTempo.Instancia != null) GerenciadorInterfaceTempo.Instancia.IniciarTemporizador();
 
         if (AdversarioScriptado.Instancia != null)
         {
@@ -253,13 +309,11 @@ public class TabuleiroManager : MonoBehaviour
 
     public void ForçarDerrotaPorTempo()
     {
-        // Se o tempo esgotou no turno do jogador
         if (turnoAtual == EstadoTurno.Jogador)
         {
             turnoAtual = EstadoTurno.Transicao;
             StartCoroutine(RotinaLimpezaGradualTabuleiro(true));
         }
-        // Se o tempo esgotou no turno do inimigo
         else if (turnoAtual == EstadoTurno.Inimigo)
         {
             turnoAtual = EstadoTurno.Transicao;
@@ -296,20 +350,29 @@ public class TabuleiroManager : MonoBehaviour
             }
         }
 
-        // Reseta dados lógicos da Grid
+        // Se o ciclo completo terminou (voltou para o jogador), avançamos o número do turno global
+        if (!proximoEhInimigo)
+        {
+            numeroDoTurnoAtual++;
+        }
+
+        AtualizarSimboloDoTurnoAtual();
+        Sprite spriteInicial = ObterSpriteDoSimbolo(simboloInicial);
+
+        // Varre todos os nós para limpar os dados lógicos E os sprites antigos
         foreach (var no in dicionarioGrid.Values)
         {
             if (no.name == nomeNoInicial)
             {
-                no.simboloAtual = simboloInicial;
                 no.estaOcupado = true;
                 no.jaEstaDourado = false;
+                no.DefinirSimboloVisual(simboloInicial, spriteInicial); // Coloca a peça inicial da rodada
             }
             else
             {
-                no.simboloAtual = TipoSimbolo.Nenhum;
                 no.estaOcupado = false;
                 no.jaEstaDourado = false;
+                no.DefinirSimboloVisual(TipoSimbolo.Nenhum, null); // Limpa COMPLETAMENTE o símbolo anterior
             }
         }
 
@@ -318,8 +381,7 @@ public class TabuleiroManager : MonoBehaviour
             jogadasDoJogador = 0;
             turnoAtual = EstadoTurno.Inimigo;
 
-            // Reinicia o temporizador focando no turno do Inimigo
-            if (TemporizadorJogo.Instancia != null) TemporizadorJogo.Instancia.IniciarTemporizador();
+            if (GerenciadorInterfaceTempo.Instancia != null) GerenciadorInterfaceTempo.Instancia.IniciarTemporizador();
 
             if (AdversarioScriptado.Instancia != null) AdversarioScriptado.Instancia.IniciarTurnoInimigo();
             else SimularFimTurnoInimigo();
@@ -332,12 +394,18 @@ public class TabuleiroManager : MonoBehaviour
 
     private void FinalizarTurnoInimigoCompleto()
     {
-        Debug.Log("[TABULEIRO] Finalizando turno do inimigo. Devolvendo controle ao Jogador.");
+        // Força o avanço do turno quando a Madu termina a rodada dela, antes de voltar para o jogador
+        numeroDoTurnoAtual++;
+
+        Debug.Log($"[TABULEIRO] Turno da Madu encerrado. Avançando para o Turno: {numeroDoTurnoAtual}");
 
         jogadasDoJogador = 0;
         turnoAtual = EstadoTurno.Jogador;
 
-        // Manda spawnar as peças novamente
+        // Atualiza o texto da UI (Ex: "Turno 2º - Seu turno")
+        if (GerenciadorInterfaceTempo.Instancia != null)
+            GerenciadorInterfaceTempo.Instancia.AtualizarTextoDeTurno(numeroDoTurnoAtual, true);
+
         if (GerenciadorDePartida.Instancia != null)
         {
             GerenciadorDePartida.Instancia.SpawnarPecasDoJogador();
@@ -347,15 +415,12 @@ public class TabuleiroManager : MonoBehaviour
             Debug.LogError("[TABULEIRO] Erro: Instância do GerenciadorDePartida não foi encontrada!");
         }
 
-        if (TemporizadorJogo.Instancia != null)
-        {
-            TemporizadorJogo.Instancia.IniciarTemporizador();
-        }
+        if (GerenciadorInterfaceTempo.Instancia != null) GerenciadorInterfaceTempo.Instancia.IniciarTemporizador();
     }
 
     public void SimularFimTurnoInimigo()
     {
-        if (TemporizadorJogo.Instancia != null) TemporizadorJogo.Instancia.PararTemporizador();
+        if (GerenciadorInterfaceTempo.Instancia != null) GerenciadorInterfaceTempo.Instancia.PararTemporizador();
         ForçarLimpezaTurnoInimigo();
     }
 
