@@ -15,5 +15,5 @@ MonoBehaviour:
   idUnico: 04
   nomeExibicao: "P\xE3o de Queijo"
   descricaoDetalhada: 
-  iconeUI: {fileID: -3201601741076559238, guid: d43dc37a6d2a43841adf59ea35c8efcd, type: 3}
+  iconeUI: {fileID: -5125834308921422453, guid: 41f731e4a8ccaf74e9131d955abf53dd, type: 3}
   prefabPecaDomino: {fileID: 8254161304950247519, guid: 9c86f71bcfecd034793c2499c7db4520, type: 3}

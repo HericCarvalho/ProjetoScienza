@@ -15,5 +15,5 @@ MonoBehaviour:
   idUnico: 00
   nomeExibicao: Picho no trem
   descricaoDetalhada: 
-  iconeUI: {fileID: 2037196685482824029, guid: d43dc37a6d2a43841adf59ea35c8efcd, type: 3}
+  iconeUI: {fileID: -4411792532270760001, guid: 41f731e4a8ccaf74e9131d955abf53dd, type: 3}
   prefabPecaDomino: {fileID: 8254161304950247519, guid: dae2d1c8a846d2149877a9bc1bf9254d, type: 3}

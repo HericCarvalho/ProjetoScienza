@@ -15,5 +15,5 @@ MonoBehaviour:
   idUnico: 05
   nomeExibicao: Privada entupida
   descricaoDetalhada: 
-  iconeUI: {fileID: 892213705547639563, guid: d43dc37a6d2a43841adf59ea35c8efcd, type: 3}
+  iconeUI: {fileID: 2932418597109352889, guid: 41f731e4a8ccaf74e9131d955abf53dd, type: 3}
   prefabPecaDomino: {fileID: 8254161304950247519, guid: d5e9a11e649096d48b1fcab1db9e16ce, type: 3}

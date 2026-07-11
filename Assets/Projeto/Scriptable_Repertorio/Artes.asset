@@ -15,5 +15,5 @@ MonoBehaviour:
   idUnico: 06
   nomeExibicao: Artes
   descricaoDetalhada: 
-  iconeUI: {fileID: 9199052627421656880, guid: d43dc37a6d2a43841adf59ea35c8efcd, type: 3}
+  iconeUI: {fileID: 87280456663973752, guid: 41f731e4a8ccaf74e9131d955abf53dd, type: 3}
   prefabPecaDomino: {fileID: 8254161304950247519, guid: 19e01a8f4380b444fa8ded44a44350ce, type: 3}
