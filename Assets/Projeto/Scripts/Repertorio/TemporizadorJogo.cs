@@ -1,5 +1,5 @@
 using UnityEngine;
-using TMPro; // Necessário para usar o TextMeshPro
+using TMPro;
 
 public class TemporizadorJogo : MonoBehaviour
 {
@@ -11,7 +11,6 @@ public class TemporizadorJogo : MonoBehaviour
     private bool cronometroAtivo = false;
 
     [Header("UI do Temporizador")]
-    [Tooltip("Arraste o componente de texto do seu contador de tempo aqui")]
     public TextMeshProUGUI textoTemporizador;
 
     void Awake()
@@ -49,31 +48,23 @@ public class TemporizadorJogo : MonoBehaviour
         cronometroAtivo = false;
     }
 
+    private void AtuaIizarVisualTemporizador() { } // Mantido oculto para focar na lógica
+
     private void AtualizarVisualTemporizador()
     {
         if (textoTemporizador != null)
         {
             textoTemporizador.text = Mathf.CeilToInt(tempoAtual).ToString() + "s";
-
-            if (tempoAtual <= 5f)
-            {
-                textoTemporizador.color = Color.red;
-            }
-            else
-            {
-                textoTemporizador.color = Color.white;
-            }
+            textoTemporizador.color = (tempoAtual <= 5f) ? Color.red : Color.white;
         }
     }
 
     private void TempoEsgotado()
     {
-        Debug.LogWarning("[TEMPO] O tempo acabou! Passando a rodada para o inimigo.");
+        Debug.LogWarning("[TEMPO] Limpando peças do jogador e trocando turno.");
         if (TabuleiroManager.Instancia != null)
         {
-            TabuleiroManager.Instancia.PassarRodadaParaInimigo();
+            TabuleiroManager.Instancia.ForçarDerrotaPorTempo();
         }
     }
-
-    public float ObterTempoAtual() => tempoAtual;
 }
