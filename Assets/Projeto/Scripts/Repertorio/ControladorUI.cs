@@ -1,46 +1,54 @@
 using UnityEngine;
-using TMPro; 
+using UnityEngine.UI;
+using TMPro;
 
 public class ControladorUI : MonoBehaviour
 {
     public static ControladorUI Instancia { get; private set; }
 
-    [Header("Contadores de Pontos")]
-    public TMPro.TextMeshProUGUI textoPontosJogador;
-    public TMPro.TextMeshProUGUI textoPontosInimigo;
+    [Header("Textos de Turno")]
+    public TextMeshProUGUI textoIdentificadorTurno; // Ex: "Turno 1º - Seu turno"
 
+    [Header("Barra de Tempo (Temporizador)")]
+    public Image barraTempoPreenchimento; // Uma Image do tipo 'Filled'
+    public TextMeshProUGUI textoNomeDaBarra; // Ex: "Tempo Restante"
 
     void Awake()
     {
-        if (Instancia == null)
+        if (Instancia == null) Instancia = this;
+        else Destroy(gameObject);
+    }
+
+    /// <summary>
+    /// Atualiza o texto do topo baseado no número do turno e em quem está jogando.
+    /// </summary>
+    public void AtualizarTextoDeTurno(int numeroTurno, bool ehVezDoJogador)
+    {
+        if (textoIdentificadorTurno == null) return;
+
+        if (ehVezDoJogador)
         {
-            Instancia = this;
+            textoIdentificadorTurno.text = $"Turno {numeroTurno}º - Seu turno";
         }
         else
         {
-            Destroy(gameObject);
+            textoIdentificadorTurno.text = $"Turno {numeroTurno}º - Turno da Madu";
         }
     }
 
-    void Start()
+    /// <summary>
+    /// Atualiza visualmente a barra de tempo (valores entre 0.0f e 1.0f)
+    /// </summary>
+    public void AtualizarBarraTempo(float percentual, string nomeEstadoTempo)
     {
-        AtualizarTextoContador(0);
-    }
-
-    public void AtualizarTextoContador(int pontos)
-    {
-        if (textoPontosJogador != null)
+        if (barraTempoPreenchimento != null)
         {
-            textoPontosJogador.text = "Jogador: " + pontos;
+            barraTempoPreenchimento.fillAmount = percentual;
         }
-    }
 
-    public void AtualizarTextoContadorInimigo(int pontos)
-    {
-        if (textoPontosInimigo != null)
+        if (textoNomeDaBarra != null)
         {
-            textoPontosInimigo.text = "Inimigo: " + pontos;
+            textoNomeDaBarra.text = nomeEstadoTempo;
         }
     }
-
 }

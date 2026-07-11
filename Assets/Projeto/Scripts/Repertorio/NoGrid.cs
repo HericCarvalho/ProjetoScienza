@@ -28,15 +28,14 @@ public class NoGrid : MonoBehaviour
     {
         simboloAtual = novoSimbolo;
 
-        // Se você usa apenas UM SpriteRenderer para o Nó inteiro (Moldura + Símbolo mudam juntos):
+        // SE VOCÊ USA APENAS UM SPRITERENDERER NO OBJETO PRINCIPAL:
         if (spriteRendererSimboloFilho == null && spriteRendererNo != null)
         {
             if (novoSimbolo == TipoSimbolo.Nenhum)
             {
-                // SE SUMIR AQUI: Significa que precisamos manter o sprite da MOLDURA VAZIA.
-                // Não mude o sprite para null se o mesmo renderizador faz o fundo do grid!
+                // Se não tem símbolo, mantemos o sprite padrão da moldura (se houver) e aplicamos a opacidade de vazio
                 Color cor = spriteRendererNo.color;
-                cor.a = opacidadeGridVazio; // Deixa menos transparente conforme configurado
+                cor.a = opacidadeGridVazio;
                 spriteRendererNo.color = cor;
             }
             else
@@ -47,21 +46,20 @@ public class NoGrid : MonoBehaviour
                 spriteRendererNo.color = cor;
             }
         }
-        // Se você usa um objeto FILHO destacado apenas para mostrar o símbolo interno:
+        // SE VOCÊ USA O OBJETO FILHO (SimboloVisual) DESTACADO PARA A PEÇA INTERNA:
         else if (spriteRendererSimboloFilho != null)
         {
             if (novoSimbolo == TipoSimbolo.Nenhum)
             {
-                spriteRendererSimboloFilho.sprite = null; // Remove o símbolo interno
+                spriteRendererSimboloFilho.sprite = null; // LIMPA VISUALMENTE A PEÇA VELHA!
 
-                // Mantém a moldura visível com a opacidade desejada
                 Color corNo = spriteRendererNo.color;
-                corNo.a = opacidadeGridVazio;
+                corNo.a = opacidadeGridVazio; // Mantém a moldura do grid visível conforme configurado
                 spriteRendererNo.color = corNo;
             }
             else
             {
-                spriteRendererSimboloFilho.sprite = imagemDoSimbolo;
+                spriteRendererSimboloFilho.sprite = imagemDoSimbolo; // Aplica o novo símbolo (Triângulo, Círculo, etc)
 
                 Color corNo = spriteRendererNo.color;
                 corNo.a = opacidadeGridOcupado;

@@ -63,10 +63,7 @@ public class TabuleiroManager : MonoBehaviour
 
     void Start()
     {
-        if (TemporizadorJogo.Instancia != null)
-        {
-            TemporizadorJogo.Instancia.IniciarTemporizador();
-        }
+
     }
 
     // Método que descobre qual símbolo deve ser usado baseado no turno atual do jogo
@@ -187,14 +184,10 @@ public class TabuleiroManager : MonoBehaviour
         if (turnoAtual == EstadoTurno.Jogador)
         {
             totalSobreposicoesSimbolos += pontosGanhos;
-            if (ControladorUI.Instancia != null)
-                ControladorUI.Instancia.AtualizarTextoContador(totalSobreposicoesSimbolos);
         }
         else
         {
             totalSobreposicoesInimigo += pontosGanhos;
-            if (ControladorUI.Instancia != null)
-                ControladorUI.Instancia.AtualizarTextoContadorInimigo(totalSobreposicoesInimigo);
         }
     }
 
@@ -294,14 +287,15 @@ public class TabuleiroManager : MonoBehaviour
     {
         if (turnoAtual != EstadoTurno.Jogador) return;
 
-        if (TemporizadorJogo.Instancia != null) TemporizadorJogo.Instancia.PararTemporizador();
+        if (GerenciadorInterfaceTempo.Instancia != null) GerenciadorInterfaceTempo.Instancia.PararTemporizador();
 
         turnoAtual = EstadoTurno.Inimigo;
 
-        if (TemporizadorJogo.Instancia != null)
-        {
-            TemporizadorJogo.Instancia.IniciarTemporizador();
-        }
+        // Atualiza o texto para o Turno da Madu
+        if (GerenciadorInterfaceTempo.Instancia != null)
+            GerenciadorInterfaceTempo.Instancia.AtualizarTextoDeTurno(numeroDoTurnoAtual, false);
+
+        if (GerenciadorInterfaceTempo.Instancia != null) GerenciadorInterfaceTempo.Instancia.IniciarTemporizador();
 
         if (AdversarioScriptado.Instancia != null)
         {
@@ -356,30 +350,29 @@ public class TabuleiroManager : MonoBehaviour
             }
         }
 
-        // Atualiza a progressão do turno global quando o ciclo do inimigo fecha de fato
+        // Se o ciclo completo terminou (voltou para o jogador), avançamos o número do turno global
         if (!proximoEhInimigo)
         {
             numeroDoTurnoAtual++;
         }
 
-        // Descobre qual o novo símbolo base da rodada
         AtualizarSimboloDoTurnoAtual();
         Sprite spriteInicial = ObterSpriteDoSimbolo(simboloInicial);
 
-        // Limpa a grid colocando o novo símbolo correto no nó de partida
+        // Varre todos os nós para limpar os dados lógicos E os sprites antigos
         foreach (var no in dicionarioGrid.Values)
         {
             if (no.name == nomeNoInicial)
             {
                 no.estaOcupado = true;
                 no.jaEstaDourado = false;
-                no.DefinirSimboloVisual(simboloInicial, spriteInicial);
+                no.DefinirSimboloVisual(simboloInicial, spriteInicial); // Coloca a peça inicial da rodada
             }
             else
             {
-                no.DefinirSimboloVisual(TipoSimbolo.Nenhum, null);
                 no.estaOcupado = false;
                 no.jaEstaDourado = false;
+                no.DefinirSimboloVisual(TipoSimbolo.Nenhum, null); // Limpa COMPLETAMENTE o símbolo anterior
             }
         }
 
@@ -388,7 +381,7 @@ public class TabuleiroManager : MonoBehaviour
             jogadasDoJogador = 0;
             turnoAtual = EstadoTurno.Inimigo;
 
-            if (TemporizadorJogo.Instancia != null) TemporizadorJogo.Instancia.IniciarTemporizador();
+            if (GerenciadorInterfaceTempo.Instancia != null) GerenciadorInterfaceTempo.Instancia.IniciarTemporizador();
 
             if (AdversarioScriptado.Instancia != null) AdversarioScriptado.Instancia.IniciarTurnoInimigo();
             else SimularFimTurnoInimigo();
@@ -401,10 +394,17 @@ public class TabuleiroManager : MonoBehaviour
 
     private void FinalizarTurnoInimigoCompleto()
     {
-        Debug.Log("[TABULEIRO] Finalizando turno do inimigo. Devolvendo controle ao Jogador.");
+        // Força o avanço do turno quando a Madu termina a rodada dela, antes de voltar para o jogador
+        numeroDoTurnoAtual++;
+
+        Debug.Log($"[TABULEIRO] Turno da Madu encerrado. Avançando para o Turno: {numeroDoTurnoAtual}");
 
         jogadasDoJogador = 0;
         turnoAtual = EstadoTurno.Jogador;
+
+        // Atualiza o texto da UI (Ex: "Turno 2º - Seu turno")
+        if (GerenciadorInterfaceTempo.Instancia != null)
+            GerenciadorInterfaceTempo.Instancia.AtualizarTextoDeTurno(numeroDoTurnoAtual, true);
 
         if (GerenciadorDePartida.Instancia != null)
         {
@@ -415,15 +415,12 @@ public class TabuleiroManager : MonoBehaviour
             Debug.LogError("[TABULEIRO] Erro: Instância do GerenciadorDePartida não foi encontrada!");
         }
 
-        if (TemporizadorJogo.Instancia != null)
-        {
-            TemporizadorJogo.Instancia.IniciarTemporizador();
-        }
+        if (GerenciadorInterfaceTempo.Instancia != null) GerenciadorInterfaceTempo.Instancia.IniciarTemporizador();
     }
 
     public void SimularFimTurnoInimigo()
     {
-        if (TemporizadorJogo.Instancia != null) TemporizadorJogo.Instancia.PararTemporizador();
+        if (GerenciadorInterfaceTempo.Instancia != null) GerenciadorInterfaceTempo.Instancia.PararTemporizador();
         ForçarLimpezaTurnoInimigo();
     }
 

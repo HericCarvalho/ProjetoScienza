@@ -106,7 +106,7 @@ public class PlayerMovement : MonoBehaviour
         Vector2 mouseWorldPos = mainCam.ScreenToWorldPoint(mousePos);
 
         Vector2 direcaoOlhar = mouseWorldPos - rb.position;
-        float anguloGiro = Mathf.Atan2(direcaoOlhar.y, direcaoOlhar.x) * Mathf.Rad2Deg - 90f;
+        float anguloGiro = Mathf.Atan2(direcaoOlhar.y, direcaoOlhar.x) * Mathf.Rad2Deg;
 
         rb.rotation = anguloGiro;
     }
