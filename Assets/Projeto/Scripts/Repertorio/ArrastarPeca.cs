@@ -8,6 +8,8 @@ public class ArrastarPeca : MonoBehaviour, IPointerDownHandler, IDragHandler, IP
     private Vector3 posicaoOriginal;
     private PecaDomino peca;
 
+    [HideInInspector] public bool sendoSegurada = false;
+
     [Header("Configuracao de Encaixe")]
     [Tooltip("Quanto MENOR este numero, mais perto do circulo a peca precisa estar para grudar. Tente valores entre 0,2 e 0,5.")]
     public float distanciaMinimaEncaixe = 0.3f;
@@ -18,6 +20,12 @@ public class ArrastarPeca : MonoBehaviour, IPointerDownHandler, IDragHandler, IP
         peca = GetComponent<PecaDomino>();
     }
 
+    void Start()
+    {
+        // Salva a posição inicial exata de onde ela nasceu na mão
+        posicaoOriginal = transform.position;
+    }
+
     public void OnPointerDown(PointerEventData eventData)
     {
         if (TabuleiroManager.Instancia != null && TabuleiroManager.Instancia.turnoAtual != TabuleiroManager.EstadoTurno.Jogador) return;
@@ -25,6 +33,7 @@ public class ArrastarPeca : MonoBehaviour, IPointerDownHandler, IDragHandler, IP
         if (peca != null && peca.foiPosicionada) return;
 
         posicaoOriginal = transform.position;
+        sendoSegurada = true;
 
         Vector3 posicaoMouse = cam.ScreenToWorldPoint(eventData.position);
         posicaoMouse.z = 0f;
@@ -44,6 +53,8 @@ public class ArrastarPeca : MonoBehaviour, IPointerDownHandler, IDragHandler, IP
 
     public void OnPointerUp(PointerEventData eventData)
     {
+        sendoSegurada = false;
+
         if (TabuleiroManager.Instancia != null && TabuleiroManager.Instancia.turnoAtual != TabuleiroManager.EstadoTurno.Jogador)
         {
             transform.position = posicaoOriginal;
@@ -82,5 +93,11 @@ public class ArrastarPeca : MonoBehaviour, IPointerDownHandler, IDragHandler, IP
             Debug.LogWarning("Soltou longe demais do grid!");
             transform.position = posicaoOriginal;
         }
+    }
+
+    public void DevolverParaAMao()
+    {
+        sendoSegurada = false;
+        transform.position = posicaoOriginal;
     }
 }

@@ -24,6 +24,10 @@ public class TabuleiroManager : MonoBehaviour
     [Tooltip("O número do turno atual do jogo (começa em 1 e aumenta cada vez que o controle volta ao jogador).")]
     public int numeroDoTurnoAtual = 1;
 
+    [Header("Telas de Fim de Jogo (UI)")]
+    public GameObject painelVitoria;
+    public GameObject painelDerrota;
+
     [Header("Contabilidade do Jogo")]
     public int totalSobreposicoesSimbolos = 0;
     public int totalSobreposicoesInimigo = 0;
@@ -39,7 +43,7 @@ public class TabuleiroManager : MonoBehaviour
     [Tooltip("Coloque aqui a sequência de símbolos para cada turno. Elemento 0 = Turno 1, Elemento 1 = Turno 2, etc.")]
     public List<TipoSimbolo> sequenciaSimbolosPorTurno = new List<TipoSimbolo>() { TipoSimbolo.Triangulo };
 
-    [HideInInspector] public TipoSimbolo simboloInicial; // Agora definido dinamicamente pela lista acima
+    [HideInInspector] public TipoSimbolo simboloInicial;
     public string nomeNoInicial = "No_Col_0_Lin_5";
 
     [Header("Banco de Imagens dos Símbolos")]
@@ -56,30 +60,32 @@ public class TabuleiroManager : MonoBehaviour
         if (Instancia == null) Instancia = this;
         else Destroy(gameObject);
 
-        // Define o primeiro símbolo antes de gerar o tabuleiro
         AtualizarSimboloDoTurnoAtual();
         GerarTabuleiroTriangular();
     }
 
     void Start()
     {
-
+        // CORREÇÃO: Garante que o temporizador e os textos visuais comecem funcionando no Turno 1
+        if (GerenciadorInterfaceTempo.Instancia != null)
+        {
+            GerenciadorInterfaceTempo.Instancia.AtualizarTextoDeTurno(numeroDoTurnoAtual, true);
+            GerenciadorInterfaceTempo.Instancia.IniciarTemporizador();
+        }
     }
 
-    // Método que descobre qual símbolo deve ser usado baseado no turno atual do jogo
     private void AtualizarSimboloDoTurnoAtual()
     {
         if (sequenciaSimbolosPorTurno == null || sequenciaSimbolosPorTurno.Count == 0)
         {
-            simboloInicial = TipoSimbolo.Triangulo; // Fallback de segurança
+            simboloInicial = TipoSimbolo.Triangulo;
             return;
         }
 
-        // Garante que se o turno passar do tamanho da lista, ele não quebra (mantém o último ou repete)
         int indice = numeroDoTurnoAtual - 1;
         if (indice >= sequenciaSimbolosPorTurno.Count)
         {
-            indice = sequenciaSimbolosPorTurno.Count - 1; // Mantém o último símbolo definido
+            indice = sequenciaSimbolosPorTurno.Count - 1;
         }
 
         simboloInicial = sequenciaSimbolosPorTurno[indice];
@@ -189,6 +195,11 @@ public class TabuleiroManager : MonoBehaviour
         {
             totalSobreposicoesInimigo += pontosGanhos;
         }
+
+        if (GerenciadorInterfaceTempo.Instancia != null)
+        {
+            GerenciadorInterfaceTempo.Instancia.AtualizarVisualBarulho(totalSobreposicoesSimbolos, totalSobreposicoesInimigo);
+        }
     }
 
     public bool TCanvasInimigo { get; set; }
@@ -249,14 +260,15 @@ public class TabuleiroManager : MonoBehaviour
 
         for (int i = 0; i < peca.circulosDaPeca.Length; i++)
         {
-            Sprite spriteDoSimbolo = ObterSpriteDoSimbolo(peca.circulosDaPeca[i].simbolo);
-            nosAlvos[i].DefinirSimboloVisual(peca.circulosDaPeca[i].simbolo, spriteDoSimbolo);
-            nosAlvos[i].estaOcupado = true;
-
+            // CORREÇÃO DO DOURADO: Define se é dourado ANTES de chamar a função visual!
             if (indicesQueSobrepuseram.Contains(i))
             {
                 nosAlvos[i].jaEstaDourado = true;
             }
+
+            Sprite spriteDoSimbolo = ObterSpriteDoSimbolo(peca.circulosDaPeca[i].simbolo);
+            nosAlvos[i].DefinirSimboloVisual(peca.circulosDaPeca[i].simbolo, spriteDoSimbolo);
+            nosAlvos[i].estaOcupado = true;
         }
 
         if (indicesQueSobrepuseram.Count > 0)
@@ -287,24 +299,10 @@ public class TabuleiroManager : MonoBehaviour
     {
         if (turnoAtual != EstadoTurno.Jogador) return;
 
-        if (GerenciadorInterfaceTempo.Instancia != null) GerenciadorInterfaceTempo.Instancia.PararTemporizador();
-
-        turnoAtual = EstadoTurno.Inimigo;
-
-        // Atualiza o texto para o Turno da Madu
         if (GerenciadorInterfaceTempo.Instancia != null)
-            GerenciadorInterfaceTempo.Instancia.AtualizarTextoDeTurno(numeroDoTurnoAtual, false);
+            GerenciadorInterfaceTempo.Instancia.PararTemporizador();
 
-        if (GerenciadorInterfaceTempo.Instancia != null) GerenciadorInterfaceTempo.Instancia.IniciarTemporizador();
-
-        if (AdversarioScriptado.Instancia != null)
-        {
-            AdversarioScriptado.Instancia.IniciarTurnoInimigo();
-        }
-        else
-        {
-            Invoke("SimularFimTurnoInimigo", 2.0f);
-        }
+        StartCoroutine(RotinaLimpezaGradualTabuleiro(proximoEhInimigo: true));
     }
 
     public void ForçarDerrotaPorTempo()
@@ -328,13 +326,17 @@ public class TabuleiroManager : MonoBehaviour
 
     private IEnumerator RotinaLimpezaGradualTabuleiro(bool proximoEhInimigo)
     {
+        // Trava o turno em transição para ninguém mexer em nada durante a limpeza
+        EstadoTurno turnoAnterior = turnoAtual;
+        turnoAtual = EstadoTurno.Transicao;
+
         PecaDomino[] pecasNaCena = FindObjectsByType<PecaDomino>(FindObjectsSortMode.None);
 
         foreach (PecaDomino peca in pecasNaCena)
         {
             if (peca.foiPosicionada)
             {
-                float tempoSumir = 0.3f;
+                float tempoSumir = 0.2f;
                 float cronometro = 0f;
                 Vector3 escalaOriginal = peca.transform.localScale;
 
@@ -346,76 +348,125 @@ public class TabuleiroManager : MonoBehaviour
                 }
 
                 Destroy(peca.gameObject);
-                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForSeconds(0.05f);
             }
         }
 
-        // Se o ciclo completo terminou (voltou para o jogador), avançamos o número do turno global
-        if (!proximoEhInimigo)
+        // --- REGRA DE PROGRESSÃO DE TURNOS ---
+        if (proximoEhInimigo)
         {
-            numeroDoTurnoAtual++;
-        }
+            turnoAtual = EstadoTurno.Inimigo;
+            if (GerenciadorInterfaceTempo.Instancia != null)
+                GerenciadorInterfaceTempo.Instancia.AtualizarTextoDeTurno(numeroDoTurnoAtual, false);
 
+            LimparDadosEVisuaisDoGrid();
+
+            if (AdversarioScriptado.Instancia != null)
+                AdversarioScriptado.Instancia.IniciarTurnoInimigo();
+
+            // CORREÇÃO: Inicia o temporizador também para o turno da Madu
+            if (GerenciadorInterfaceTempo.Instancia != null)
+                GerenciadorInterfaceTempo.Instancia.IniciarTemporizador();
+        }
+        else
+        {
+            // Só avança para o próximo turno se o jogo for continuar!
+            numeroDoTurnoAtual++;
+
+            jogadasDoJogador = 0;
+            turnoAtual = EstadoTurno.Jogador;
+            if (GerenciadorInterfaceTempo.Instancia != null)
+                GerenciadorInterfaceTempo.Instancia.AtualizarTextoDeTurno(numeroDoTurnoAtual, true);
+
+            LimparDadosEVisuaisDoGrid();
+
+            if (GerenciadorDePartida.Instancia != null)
+                GerenciadorDePartida.Instancia.SpawnarPecasDoJogador();
+
+            if (GerenciadorInterfaceTempo.Instancia != null)
+                GerenciadorInterfaceTempo.Instancia.IniciarTemporizador();
+        }
+    }
+    private void LimparDadosEVisuaisDoGrid()
+    {
         AtualizarSimboloDoTurnoAtual();
         Sprite spriteInicial = ObterSpriteDoSimbolo(simboloInicial);
 
-        // Varre todos os nós para limpar os dados lógicos E os sprites antigos
         foreach (var no in dicionarioGrid.Values)
         {
+            // CORREÇÃO: Garante o reset do estado dourado
+            no.jaEstaDourado = false;
+
             if (no.name == nomeNoInicial)
             {
                 no.estaOcupado = true;
-                no.jaEstaDourado = false;
-                no.DefinirSimboloVisual(simboloInicial, spriteInicial); // Coloca a peça inicial da rodada
+                no.DefinirSimboloVisual(simboloInicial, spriteInicial);
             }
             else
             {
                 no.estaOcupado = false;
-                no.jaEstaDourado = false;
-                no.DefinirSimboloVisual(TipoSimbolo.Nenhum, null); // Limpa COMPLETAMENTE o símbolo anterior
+                no.DefinirSimboloVisual(TipoSimbolo.Nenhum, null);
             }
-        }
-
-        if (proximoEhInimigo)
-        {
-            jogadasDoJogador = 0;
-            turnoAtual = EstadoTurno.Inimigo;
-
-            if (GerenciadorInterfaceTempo.Instancia != null) GerenciadorInterfaceTempo.Instancia.IniciarTemporizador();
-
-            if (AdversarioScriptado.Instancia != null) AdversarioScriptado.Instancia.IniciarTurnoInimigo();
-            else SimularFimTurnoInimigo();
-        }
-        else
-        {
-            FinalizarTurnoInimigoCompleto();
         }
     }
 
-    private void FinalizarTurnoInimigoCompleto()
+    private IEnumerator RotinaLimpezaFinalEEncerramento()
     {
-        // Força o avanço do turno quando a Madu termina a rodada dela, antes de voltar para o jogador
-        numeroDoTurnoAtual++;
+        turnoAtual = EstadoTurno.Transicao;
 
-        Debug.Log($"[TABULEIRO] Turno da Madu encerrado. Avançando para o Turno: {numeroDoTurnoAtual}");
-
-        jogadasDoJogador = 0;
-        turnoAtual = EstadoTurno.Jogador;
-
-        // Atualiza o texto da UI (Ex: "Turno 2º - Seu turno")
-        if (GerenciadorInterfaceTempo.Instancia != null)
-            GerenciadorInterfaceTempo.Instancia.AtualizarTextoDeTurno(numeroDoTurnoAtual, true);
-
-        if (GerenciadorDePartida.Instancia != null)
+        PecaDomino[] pecasNaCena = FindObjectsByType<PecaDomino>(FindObjectsSortMode.None);
+        foreach (PecaDomino peca in pecasNaCena)
         {
-            GerenciadorDePartida.Instancia.SpawnarPecasDoJogador();
+            if (peca != null && peca.foiPosicionada)
+            {
+                Destroy(peca.gameObject);
+            }
+        }
+        yield return new WaitForSeconds(0.5f);
+
+        VerificarFimDeJogo();
+    }
+
+    public void FinalizarTurnoInimigoCompleto()
+    {
+        Debug.Log($"[TABULEIRO] Madu terminou as jogadas dela no Turno Global: {numeroDoTurnoAtual}.");
+
+        if (numeroDoTurnoAtual >= 3)
+        {
+            if (GerenciadorInterfaceTempo.Instancia != null)
+                GerenciadorInterfaceTempo.Instancia.PararTemporizador();
+
+            StartCoroutine(RotinaLimpezaFinalEEncerramento());
+            return;
+        }
+
+        StartCoroutine(RotinaLimpezaGradualTabuleiro(proximoEhInimigo: false));
+    }
+
+    private void VerificarFimDeJogo()
+    {
+        turnoAtual = EstadoTurno.Transicao;
+        Debug.Log("[FIM DE JOGO] Partida finalizada! Total Jogador: " + totalSobreposicoesSimbolos + " | Total Madu: " + totalSobreposicoesInimigo);
+
+        if (painelVitoria != null) painelVitoria.SetActive(false);
+        if (painelDerrota != null) painelDerrota.SetActive(false);
+
+        if (totalSobreposicoesSimbolos > totalSobreposicoesInimigo)
+        {
+            Debug.Log("RESULTADO: VITÓRIA DO JOGADOR!");
+            if (painelVitoria != null) painelVitoria.SetActive(true);
+
+            if (GerenciadorInterfaceTempo.Instancia != null && GerenciadorInterfaceTempo.Instancia.textoIdentificadorTurno != null)
+                GerenciadorInterfaceTempo.Instancia.textoIdentificadorTurno.text = "Vitória!";
         }
         else
         {
-            Debug.LogError("[TABULEIRO] Erro: Instância do GerenciadorDePartida não foi encontrada!");
-        }
+            Debug.Log("RESULTADO: DERROTA DO JOGADOR!");
+            if (painelDerrota != null) painelDerrota.SetActive(true);
 
-        if (GerenciadorInterfaceTempo.Instancia != null) GerenciadorInterfaceTempo.Instancia.IniciarTemporizador();
+            if (GerenciadorInterfaceTempo.Instancia != null && GerenciadorInterfaceTempo.Instancia.textoIdentificadorTurno != null)
+                GerenciadorInterfaceTempo.Instancia.textoIdentificadorTurno.text = "Derrota!";
+        }
     }
 
     public void SimularFimTurnoInimigo()

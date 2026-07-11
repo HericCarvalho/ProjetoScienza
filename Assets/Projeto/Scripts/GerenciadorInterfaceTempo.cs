@@ -7,11 +7,15 @@ public class GerenciadorInterfaceTempo : MonoBehaviour
     public static GerenciadorInterfaceTempo Instancia { get; private set; }
 
     [Header("Textos de Turno")]
-    public TextMeshProUGUI textoIdentificadorTurno; // Ex: "Turno 1º - Seu turno"
+    public TextMeshProUGUI textoIdentificadorTurno;
 
-    [Header("Barra de Tempo (Temporizador)")]
-    public Image barraTempoPreenchimento; // Image com Image Type configurada como 'Filled'
-    public TextMeshProUGUI textoNomeDaBarra; // Ex: "Tempo Restante"
+    [Header("Barra de Tempo (Ritmo)")]
+    public Image barraTempoPreenchimento;
+    public TextMeshProUGUI textoNomeDaBarra;
+
+    [Header("Barras de Barulho (Pontuação)")]
+    public Image barraBarulhoJogador;
+    public Image barraBarulhoAdversario;
 
     [Header("Configurações de Tempo")]
     public float tempoMaximoTurno = 30f;
@@ -24,31 +28,70 @@ public class GerenciadorInterfaceTempo : MonoBehaviour
         else Destroy(gameObject);
     }
 
+    void Start()
+    {
+        if (textoNomeDaBarra != null) textoNomeDaBarra.text = "Ritmo";
+
+        if (barraBarulhoJogador != null) barraBarulhoJogador.fillAmount = 0f;
+        if (barraBarulhoAdversario != null) barraBarulhoAdversario.fillAmount = 0f;
+    }
+
     void Update()
     {
         if (!cronometroAtivo) return;
 
         tempoAtual -= Time.deltaTime;
+        tempoAtual = Mathf.Clamp(tempoAtual, 0f, tempoMaximoTurno);
 
-        // Calcula a fração para a barra de UI (vai de 1 de volta para 0)
-        float percentualNormalizado = Mathf.Clamp01(tempoAtual / tempoMaximoTurno);
-        AtualizarBarraTempo(percentualNormalizado, "Tempo Restante");
+        float percentualNormalizado = tempoAtual / tempoMaximoTurno;
+
+        if (barraTempoPreenchimento != null)
+        {
+            barraTempoPreenchimento.fillAmount = percentualNormalizado;
+        }
 
         if (tempoAtual <= 0)
         {
             PararTemporizador();
+
+            ArrastarPeca[] pecasSendoArrastadas = FindObjectsByType<ArrastarPeca>(FindObjectsSortMode.None);
+            foreach (ArrastarPeca arrastavel in pecasSendoArrastadas)
+            {
+                if (arrastavel != null && arrastavel.sendoSegurada)
+                {
+                    arrastavel.DevolverParaAMao();
+                }
+            }
+
             if (TabuleiroManager.Instancia != null)
             {
-                TabuleiroManager.Instancia.ForçarDerrotaPorTempo();
+                // CRUCIAL: Só pune com derrota se o tempo acabar NO TURNO DO JOGADOR
+                if (TabuleiroManager.Instancia.turnoAtual == TabuleiroManager.EstadoTurno.Jogador)
+                {
+                    TabuleiroManager.Instancia.ForçarDerrotaPorTempo();
+                }
+                // Se o tempo acabar no turno da Madu, força a finalização do turno dela de forma limpa
+                else if (TabuleiroManager.Instancia.turnoAtual == TabuleiroManager.EstadoTurno.Inimigo)
+                {
+                    Debug.LogWarning("[TEMPO] Tempo esgotado para a Madu! Forçando passagem de turno.");
+                    TabuleiroManager.Instancia.FinalizarTurnoInimigoCompleto();
+                }
             }
         }
     }
 
-    // --- MÉTODOS DO TEMPORIZADOR ---
     public void IniciarTemporizador()
     {
         tempoAtual = tempoMaximoTurno;
         cronometroAtivo = true;
+
+        // CORREÇÃO VISUAL: Garante que a barra volte a ficar 100% cheia imediatamente no clique/troca de turno
+        if (barraTempoPreenchimento != null)
+        {
+            barraTempoPreenchimento.fillAmount = 1f;
+        }
+
+        Debug.Log($"[TEMPO] Temporizador iniciado com {tempoMaximoTurno} segundos.");
     }
 
     public void PararTemporizador()
@@ -56,39 +99,37 @@ public class GerenciadorInterfaceTempo : MonoBehaviour
         cronometroAtivo = false;
     }
 
-    // --- MÉTODOS DE CONTROLE DA UI ---
     public void AtualizarTextoDeTurno(int numeroTurno, bool ehVezDoJogador)
     {
         if (textoIdentificadorTurno == null) return;
 
         if (ehVezDoJogador)
         {
-            textoIdentificadorTurno.text = $"Turno {numeroTurno}º - Seu turno";
+            textoIdentificadorTurno.text = $"{numeroTurno}°Turno - Sua vez";
         }
         else
         {
-            textoIdentificadorTurno.text = $"Turno {numeroTurno}º - Turno da Madu";
+            textoIdentificadorTurno.text = $"{numeroTurno}°Turno - Vez da madu";
         }
     }
 
-    private void AtualizarBarraTempo(float percentual, string nomeEstadoTempo)
+    public void AtualizarVisualBarulho(int pontosJogador, int pontosInimigo)
     {
-        if (barraTempoPreenchimento != null)
+        float tetoPontos = Mathf.Max(10f, Mathf.Max(pontosJogador, pontosInimigo));
+
+        if (barraBarulhoJogador != null)
         {
-            barraTempoPreenchimento.fillAmount = percentual;
+            barraBarulhoJogador.fillAmount = (float)pontosJogador / tetoPontos;
         }
 
-        if (textoNomeDaBarra != null)
+        if (barraBarulhoAdversario != null)
         {
-            textoNomeDaBarra.text = nomeEstadoTempo;
+            barraBarulhoAdversario.fillAmount = (float)pontosInimigo / tetoPontos;
         }
     }
 
-    // --- MÉTODO DISPARADOR DO FIM DO TUTORIAL (Chame pela Timeline) ---
     public void IniciarJogoAposTutorial()
     {
-        Debug.Log("[TUTORIAL] Tutorial finalizado. Iniciando partida!");
-
         IniciarTemporizador();
 
         if (TabuleiroManager.Instancia != null)
