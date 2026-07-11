@@ -22706,7 +22706,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cb6015a38ea2b643b0acd683e860ce9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GerenciadorAudio
-  mixerGlobal: {fileID: 24100000, guid: f22577d0165acae4d950028a3660eb9d, type: 2}
+  mixerGlobal: {fileID: 24100000, guid: dc9fe3f084fd73f4e841fe732642c0e8, type: 2}
   fonteMusica: {fileID: 633411318}
   fonteAmbiente: {fileID: 633411320}
   fonteSFX2D: {fileID: 633411319}

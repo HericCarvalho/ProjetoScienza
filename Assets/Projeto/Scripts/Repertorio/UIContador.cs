@@ -5,11 +5,10 @@ public class ControladorUI : MonoBehaviour
 {
     public static ControladorUI Instancia { get; private set; }
 
-    [Header("Componentes de UI")]
-    [SerializeField] private TextMeshProUGUI textoContadorTMP;
+    [Header("Contadores de Pontos")]
+    public TMPro.TextMeshProUGUI textoPontosJogador;
+    public TMPro.TextMeshProUGUI textoPontosInimigo;
 
-    [Header("Configuração de Texto")]
-    [SerializeField] private string prefixoTexto = "Símbolos Combinados: ";
 
     void Awake()
     {
@@ -28,15 +27,20 @@ public class ControladorUI : MonoBehaviour
         AtualizarTextoContador(0);
     }
 
-    public void AtualizarTextoContador(int novoTotal)
+    public void AtualizarTextoContador(int pontos)
     {
-        if (textoContadorTMP != null)
+        if (textoPontosJogador != null)
         {
-            textoContadorTMP.text = prefixoTexto + novoTotal.ToString();
-        }
-        else
-        {
-            Debug.LogWarning("[UI] O componente TextMeshProUGUI não foi arrastado no Inspector!");
+            textoPontosJogador.text = "Jogador: " + pontos;
         }
     }
+
+    public void AtualizarTextoContadorInimigo(int pontos)
+    {
+        if (textoPontosInimigo != null)
+        {
+            textoPontosInimigo.text = "Inimigo: " + pontos;
+        }
+    }
+
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 
 public class TabuleiroManager : MonoBehaviour
@@ -13,7 +14,8 @@ public class TabuleiroManager : MonoBehaviour
     public int maximoJogadasPorTurno = 4;
 
     [Header("Contabilidade do Jogo")]
-    public int totalSobreposicoesSimbolos = 0;
+    public int totalSobreposicoesSimbolos = 0;   // Pontos do Jogador
+    public int totalSobreposicoesInimigo = 0;    // Pontos do Inimigo
 
     [Header("Configuracoes do Grid Triangular")]
     public int tamanhoBaseTopo = 6;
@@ -21,7 +23,11 @@ public class TabuleiroManager : MonoBehaviour
 
     [Header("Prefabs")]
     public GameObject prefabNoGrid;
+
+    [Header("Configuração de Símbolo Inicial")]
     public TipoSimbolo simboloInicial = TipoSimbolo.Triangulo;
+    [Tooltip("Nome do nó que se comporta como o ponto de partida do jogo.")]
+    public string nomeNoInicial = "No_Col_0_Lin_5";
 
     private Dictionary<Vector2Int, NoGrid> dicionarioGrid = new Dictionary<Vector2Int, NoGrid>();
 
@@ -72,13 +78,28 @@ public class TabuleiroManager : MonoBehaviour
                 noScript.simboloAtual = TipoSimbolo.Nenhum;
                 noScript.estaOcupado = false;
 
-                if (y == tamanhoBaseTopo - 1 && x == 0)
+                if (novoNoObj.name == nomeNoInicial)
                 {
                     noScript.simboloAtual = simboloInicial;
                     noScript.estaOcupado = true;
                 }
 
                 dicionarioGrid.Add(new Vector2Int(x, y), noScript);
+            }
+        }
+    }
+
+    public void AlterarSimboloInicial(TipoSimbolo novoSimbolo)
+    {
+        simboloInicial = novoSimbolo;
+        foreach (var no in dicionarioGrid.Values)
+        {
+            if (no.name == nomeNoInicial)
+            {
+                no.simboloAtual = novoSimbolo;
+                no.estaOcupado = true;
+                no.jaEstaDourado = false;
+                break;
             }
         }
     }
@@ -100,9 +121,28 @@ public class TabuleiroManager : MonoBehaviour
         return noMaisProximo;
     }
 
+    private void ContabilizarPontuacao(int pontosGanhos)
+    {
+        if (turnoAtual == EstadoTurno.Jogador)
+        {
+            totalSobreposicoesSimbolos += pontosGanhos;
+            if (ControladorUI.Instancia != null)
+                ControladorUI.Instancia.AtualizarTextoContador(totalSobreposicoesSimbolos);
+        }
+        else // Se for turno do inimigo ou se estiver rodando o script simulado dele
+        {
+            totalSobreposicoesInimigo += pontosGanhos;
+            if (ControladorUI.Instancia != null)
+                ControladorUI.Instancia.AtualizarTextoContadorInimigo(totalSobreposicoesInimigo);
+        }
+    }
+
+    public bool TCanvasInimigo { get; set; } 
+
     public bool TentarPosicionarPeca(PecaDomino peca, NoGrid noCentro)
     {
-        if (turnoAtual != EstadoTurno.Jogador) return false;
+        // Aceita a jogada se for o jogador OU se o script do inimigo estiver simulando no momento correto
+        if (turnoAtual != EstadoTurno.Jogador && !peca.name.Contains("(Inimigo)")) return false;
 
         List<NoGrid> nosAlvos = new List<NoGrid>();
 
@@ -112,20 +152,16 @@ public class TabuleiroManager : MonoBehaviour
             int alvoY = noCentro.y + sub.posicaoRelativa.y;
             Vector2Int coordenadaAlvo = new Vector2Int(alvoX, alvoY);
 
-            if (!dicionarioGrid.ContainsKey(coordenadaAlvo))
-            {
-                Debug.LogWarning("[BLOQUEADO] Fora dos limites do tabuleiro.");
-                return false;
-            }
+            if (!dicionarioGrid.ContainsKey(coordenadaAlvo)) return false;
             nosAlvos.Add(dicionarioGrid[coordenadaAlvo]);
         }
 
         bool jogoJaComecou = TotalNosOcupados() > 1;
         bool encostouEmPecaAtiva = false;
 
-        if (!jogoJaComecou && noCentro.name != "No_Col_0_Lin_5") return false;
+        if (!jogoJaComecou && noCentro.name != nomeNoInicial) return false;
 
-        if (noCentro.name == "No_Col_0_Lin_5" || noCentro.estaOcupado) encostouEmPecaAtiva = true;
+        if (noCentro.name == nomeNoInicial || noCentro.estaOcupado) encostouEmPecaAtiva = true;
         foreach (NoGrid no in nosAlvos)
         {
             if (no.estaOcupado) encostouEmPecaAtiva = true;
@@ -152,7 +188,7 @@ public class TabuleiroManager : MonoBehaviour
             {
                 indicesQueSobrepuseram.Add(i);
             }
-            else if (nosAlvos[i].name == "No_Col_0_Lin_5" && !jogoJaComecou)
+            else if (nosAlvos[i].name == nomeNoInicial && !jogoJaComecou)
             {
                 indicesQueSobrepuseram.Add(i);
             }
@@ -170,13 +206,7 @@ public class TabuleiroManager : MonoBehaviour
 
         if (indicesQueSobrepuseram.Count > 0)
         {
-            totalSobreposicoesSimbolos += indicesQueSobrepuseram.Count;
-            Debug.Log($"[CONTADOR] +{indicesQueSobrepuseram.Count} sobreposições nesta rodada. Total Acumulado do Jogo: {totalSobreposicoesSimbolos}");
-
-            if (ControladorUI.Instancia != null)
-            {
-                ControladorUI.Instancia.AtualizarTextoContador(totalSobreposicoesSimbolos);
-            }
+            ContabilizarPontuacao(indicesQueSobrepuseram.Count);
         }
 
         PecaFeedback feedback = peca.GetComponent<PecaFeedback>();
@@ -186,10 +216,13 @@ public class TabuleiroManager : MonoBehaviour
             feedback.AplicarBrilhoDourado(indicesQueSobrepuseram);
         }
 
-        jogadasDoJogador++;
-        if (jogadasDoJogador >= maximoJogadasPorTurno)
+        if (turnoAtual == EstadoTurno.Jogador)
         {
-            PassarRodadaParaInimigo();
+            jogadasDoJogador++;
+            if (jogadasDoJogador >= maximoJogadasPorTurno)
+            {
+                PassarRodadaParaInimigo();
+            }
         }
 
         return true;
@@ -201,22 +234,129 @@ public class TabuleiroManager : MonoBehaviour
 
         if (TemporizadorJogo.Instancia != null) TemporizadorJogo.Instancia.PararTemporizador();
 
-        turnoAtual = EstadoTurno.Transicao;
-        Debug.Log("[TURNO] Turno do jogador encerrado. Iniciando turno do inimigo...");
+        turnoAtual = EstadoTurno.Inimigo; // Atualizado diretamente para Inimigo para o timer rodar
 
-        Invoke("SimularFimTurnoInimigo", 2.0f);
+        if (TemporizadorJogo.Instancia != null)
+        {
+            TemporizadorJogo.Instancia.IniciarTemporizador(); // Inicia o tempo do Inimigo
+        }
+
+        if (AdversarioScriptado.Instancia != null)
+        {
+            AdversarioScriptado.Instancia.IniciarTurnoInimigo();
+        }
+        else
+        {
+            Invoke("SimularFimTurnoInimigo", 2.0f);
+        }
     }
 
-    private void SimularFimTurnoInimigo()
+    public void ForçarDerrotaPorTempo()
     {
+        // Se o tempo esgotou no turno do jogador
+        if (turnoAtual == EstadoTurno.Jogador)
+        {
+            turnoAtual = EstadoTurno.Transicao;
+            StartCoroutine(RotinaLimpezaGradualTabuleiro(true));
+        }
+        // Se o tempo esgotou no turno do inimigo
+        else if (turnoAtual == EstadoTurno.Inimigo)
+        {
+            turnoAtual = EstadoTurno.Transicao;
+            StartCoroutine(RotinaLimpezaGradualTabuleiro(false));
+        }
+    }
+
+    public void ForçarLimpezaTurnoInimigo()
+    {
+        StartCoroutine(RotinaLimpezaGradualTabuleiro(false));
+    }
+
+    private IEnumerator RotinaLimpezaGradualTabuleiro(bool proximoEhInimigo)
+    {
+        PecaDomino[] pecasNaCena = FindObjectsByType<PecaDomino>(FindObjectsSortMode.None);
+
+        foreach (PecaDomino peca in pecasNaCena)
+        {
+            if (peca.foiPosicionada)
+            {
+                float tempoSumir = 0.3f;
+                float cronometro = 0f;
+                Vector3 escalaOriginal = peca.transform.localScale;
+
+                while (cronometro < tempoSumir)
+                {
+                    cronometro += Time.deltaTime;
+                    if (peca != null) peca.transform.localScale = Vector3.Lerp(escalaOriginal, Vector3.zero, cronometro / tempoSumir);
+                    yield return null;
+                }
+
+                Destroy(peca.gameObject);
+                yield return new WaitForSeconds(0.1f);
+            }
+        }
+
+        // Reseta dados lógicos da Grid
+        foreach (var no in dicionarioGrid.Values)
+        {
+            if (no.name == nomeNoInicial)
+            {
+                no.simboloAtual = simboloInicial;
+                no.estaOcupado = true;
+                no.jaEstaDourado = false;
+            }
+            else
+            {
+                no.simboloAtual = TipoSimbolo.Nenhum;
+                no.estaOcupado = false;
+                no.jaEstaDourado = false;
+            }
+        }
+
+        if (proximoEhInimigo)
+        {
+            jogadasDoJogador = 0;
+            turnoAtual = EstadoTurno.Inimigo;
+
+            // Reinicia o temporizador focando no turno do Inimigo
+            if (TemporizadorJogo.Instancia != null) TemporizadorJogo.Instancia.IniciarTemporizador();
+
+            if (AdversarioScriptado.Instancia != null) AdversarioScriptado.Instancia.IniciarTurnoInimigo();
+            else SimularFimTurnoInimigo();
+        }
+        else
+        {
+            FinalizarTurnoInimigoCompleto();
+        }
+    }
+
+    private void FinalizarTurnoInimigoCompleto()
+    {
+        Debug.Log("[TABULEIRO] Finalizando turno do inimigo. Devolvendo controle ao Jogador.");
+
         jogadasDoJogador = 0;
         turnoAtual = EstadoTurno.Jogador;
-        Debug.Log("[TURNO] Seu turno recomeçou!");
+
+        // Manda spawnar as peças novamente
+        if (GerenciadorDePartida.Instancia != null)
+        {
+            GerenciadorDePartida.Instancia.SpawnarPecasDoJogador();
+        }
+        else
+        {
+            Debug.LogError("[TABULEIRO] Erro: Instância do GerenciadorDePartida não foi encontrada!");
+        }
 
         if (TemporizadorJogo.Instancia != null)
         {
             TemporizadorJogo.Instancia.IniciarTemporizador();
         }
+    }
+
+    public void SimularFimTurnoInimigo()
+    {
+        if (TemporizadorJogo.Instancia != null) TemporizadorJogo.Instancia.PararTemporizador();
+        ForçarLimpezaTurnoInimigo();
     }
 
     private int TotalNosOcupados()
@@ -227,19 +367,5 @@ public class TabuleiroManager : MonoBehaviour
             if (no.estaOcupado) count++;
         }
         return count;
-    }
-
-    public int ObterTotalSobreposicoes()
-    {
-        return totalSobreposicoesSimbolos;
-    }
-
-    public void ResetarContadorSobreposicoes()
-    {
-        totalSobreposicoesSimbolos = 0;
-        if (ControladorUI.Instancia != null)
-        {
-            ControladorUI.Instancia.AtualizarTextoContador(0);
-        }
     }
 }
