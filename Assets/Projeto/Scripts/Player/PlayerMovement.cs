@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     private Camera mainCam;                         // Guarda a referência da câmera
     private PlayerControls controls;                // classe gerada pelo inputsystem
     private IInteractable objetoInteragivelAtual;   // Guarda quem está perto do player
+    private Animator animator;                         // Guarda a referência do Animator do player
     #endregion
 
     #region VARIAVEIS: DADOS DE ENTRADA (INPUTS)
@@ -32,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.WakeUp();
         mainCam = Camera.main;
+        animator = GetComponent<Animator>();
     }
     void OnEnable()
     {
@@ -95,6 +97,8 @@ public class PlayerMovement : MonoBehaviour
 
         Vector2 novaPosicao = rb.position + moveInput * moveSpeed * Time.fixedDeltaTime;
         rb.MovePosition(novaPosicao);
+        bool isMoving = moveInput.sqrMagnitude > 0.001f;
+        animator.SetBool("IsMoving", isMoving);
     }
 
     private void ProcessarRotacao()
@@ -102,7 +106,7 @@ public class PlayerMovement : MonoBehaviour
         Vector2 mouseWorldPos = mainCam.ScreenToWorldPoint(mousePos);
 
         Vector2 direcaoOlhar = mouseWorldPos - rb.position;
-        float anguloGiro = Mathf.Atan2(direcaoOlhar.y, direcaoOlhar.x) * Mathf.Rad2Deg - 90f;
+        float anguloGiro = Mathf.Atan2(direcaoOlhar.y, direcaoOlhar.x) * Mathf.Rad2Deg;
 
         rb.rotation = anguloGiro;
     }

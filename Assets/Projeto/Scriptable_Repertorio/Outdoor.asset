@@ -15,5 +15,5 @@ MonoBehaviour:
   idUnico: 02
   nomeExibicao: Outdoor
   descricaoDetalhada: 
-  iconeUI: {fileID: -7574667980544689397, guid: d43dc37a6d2a43841adf59ea35c8efcd, type: 3}
+  iconeUI: {fileID: -6741860964245873751, guid: 41f731e4a8ccaf74e9131d955abf53dd, type: 3}
   prefabPecaDomino: {fileID: 8254161304950247519, guid: 355628d6a4635644693509f0d5ed1922, type: 3}
