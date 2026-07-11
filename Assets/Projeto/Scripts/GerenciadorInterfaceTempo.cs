@@ -13,11 +13,11 @@ public class GerenciadorInterfaceTempo : MonoBehaviour
     public Image barraTempoPreenchimento;
     public TextMeshProUGUI textoNomeDaBarra;
 
-    [Header("Barras de Barulho (Pontuação)")]
+    [Header("Barras de Barulho (Pontuaï¿½ï¿½o)")]
     public Image barraBarulhoJogador;
     public Image barraBarulhoAdversario;
 
-    [Header("Configurações de Tempo")]
+    [Header("Configuraï¿½ï¿½es de Tempo")]
     public float tempoMaximoTurno = 30f;
     private float tempoAtual;
     private bool cronometroAtivo = false;
@@ -65,15 +65,15 @@ public class GerenciadorInterfaceTempo : MonoBehaviour
 
             if (TabuleiroManager.Instancia != null)
             {
-                // CRUCIAL: Só pune com derrota se o tempo acabar NO TURNO DO JOGADOR
+                // CRUCIAL: Sï¿½ pune com derrota se o tempo acabar NO TURNO DO JOGADOR
                 if (TabuleiroManager.Instancia.turnoAtual == TabuleiroManager.EstadoTurno.Jogador)
                 {
-                    TabuleiroManager.Instancia.ForçarDerrotaPorTempo();
+                    TabuleiroManager.Instancia.ForÃ§arDerrotaPorTempo();
                 }
-                // Se o tempo acabar no turno da Madu, força a finalização do turno dela de forma limpa
+                // Se o tempo acabar no turno da Madu, forï¿½a a finalizaï¿½ï¿½o do turno dela de forma limpa
                 else if (TabuleiroManager.Instancia.turnoAtual == TabuleiroManager.EstadoTurno.Inimigo)
                 {
-                    Debug.LogWarning("[TEMPO] Tempo esgotado para a Madu! Forçando passagem de turno.");
+                    Debug.LogWarning("[TEMPO] Tempo esgotado para a Madu! Forï¿½ando passagem de turno.");
                     TabuleiroManager.Instancia.FinalizarTurnoInimigoCompleto();
                 }
             }
@@ -85,7 +85,7 @@ public class GerenciadorInterfaceTempo : MonoBehaviour
         tempoAtual = tempoMaximoTurno;
         cronometroAtivo = true;
 
-        // CORREÇÃO VISUAL: Garante que a barra volte a ficar 100% cheia imediatamente no clique/troca de turno
+        // CORREï¿½ï¿½O VISUAL: Garante que a barra volte a ficar 100% cheia imediatamente no clique/troca de turno
         if (barraTempoPreenchimento != null)
         {
             barraTempoPreenchimento.fillAmount = 1f;
@@ -105,11 +105,11 @@ public class GerenciadorInterfaceTempo : MonoBehaviour
 
         if (ehVezDoJogador)
         {
-            textoIdentificadorTurno.text = $"{numeroTurno}°Turno - Sua vez";
+            textoIdentificadorTurno.text = $"{numeroTurno}ï¿½Turno - Sua vez";
         }
         else
         {
-            textoIdentificadorTurno.text = $"{numeroTurno}°Turno - Vez da madu";
+            textoIdentificadorTurno.text = $"{numeroTurno}ï¿½Turno - Vez da madu";
         }
     }
 
