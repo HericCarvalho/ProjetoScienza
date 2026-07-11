@@ -37,15 +37,25 @@ public class AdversarioScriptado : MonoBehaviour
 
     public void IniciarTurnoInimigo()
     {
-        if (indiceTurnoAtual < listaDeTurnos.Count)
+        if (TabuleiroManager.Instancia == null) return;
+
+        int indiceDoTurnoDela = TabuleiroManager.Instancia.numeroDoTurnoAtual - 1;
+
+        Debug.Log($"[IA MADU] Lendo jogadas para o {TabuleiroManager.Instancia.numeroDoTurnoAtual}º Turno (Índice da Lista: {indiceDoTurnoDela})");
+
+        if (indiceDoTurnoDela >= 0 && indiceDoTurnoDela < listaDeTurnos.Count)
         {
-            StartCoroutine(RotinaTurnoInimigo(listaDeTurnos[indiceTurnoAtual]));
-            indiceTurnoAtual++;
+            StartCoroutine(RotinaTurnoInimigo(listaDeTurnos[indiceDoTurnoDela]));
         }
         else
         {
-            Debug.LogWarning("[INIMIGO] Todos os turnos scriptados acabaram! Limpando e reiniciando ciclo.");
-            TabuleiroManager.Instancia.SimularFimTurnoInimigo();
+            Debug.LogWarning("[INIMIGO] Nenhuma jogada programada encontrada para este turno. Passando vez.");
+            // Modifique a última linha do turno da Madu para chamar esta função específica:
+            if (TabuleiroManager.Instancia != null)
+            {
+                // Usamos Invoke para dar um pequeno respiro de 1 segundo após ela colocar a última peça, para ficar natural
+                TabuleiroManager.Instancia.Invoke("FinalizarTurnoInimigoCompleto", 1.0f);
+            }
         }
     }
 
