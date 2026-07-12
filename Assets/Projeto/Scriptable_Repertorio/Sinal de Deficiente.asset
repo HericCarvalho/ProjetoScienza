@@ -15,5 +15,5 @@ MonoBehaviour:
   idUnico: 08
   nomeExibicao: Sinal de Deficiente
   descricaoDetalhada: 
-  iconeUI: {fileID: 512198454703148881, guid: d43dc37a6d2a43841adf59ea35c8efcd, type: 3}
+  iconeUI: {fileID: 8660813456322616993, guid: 41f731e4a8ccaf74e9131d955abf53dd, type: 3}
   prefabPecaDomino: {fileID: 8254161304950247519, guid: 7397036edb6930340b48b664efb74f04, type: 3}

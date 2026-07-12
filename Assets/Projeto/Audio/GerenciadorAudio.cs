@@ -5,10 +5,10 @@ public class GerenciadorAudio : MonoBehaviour
 {
     public static GerenciadorAudio Instancia { get; private set; }
 
-    [Header("Configuração do Mixer")]
+    [Header("Configuraï¿½ï¿½o do Mixer")]
     [SerializeField] private AudioMixer mixerGlobal;
 
-    [Header("Fontes de Áudio Fixas")]
+    [Header("Fontes de ï¿½udio Fixas")]
     [SerializeField] private AudioSource fonteMusica;
     [SerializeField] private AudioSource fonteAmbiente;
     [SerializeField] private AudioSource fonteSFX2D;
@@ -56,7 +56,6 @@ public class GerenciadorAudio : MonoBehaviour
     public void TocarSFXNoObjeto(AudioClip sfx, Vector3 posicao, float volume = 1f)
     {
         if (sfx == null) return;
-        // Cria um AudioSource temporário em 3D que se auto-destrói ao acabar o som
         AudioSource.PlayClipAtPoint(sfx, posicao, volume);
     }
 
@@ -77,7 +76,11 @@ public class GerenciadorAudio : MonoBehaviour
 
     private float ConverterParaDecibel(float valorLinear)
     {
-        valorLinear = Mathf.Clamp(valorLinear, 0.0001f, 1f); // Evita log de zero
+        valorLinear = Mathf.Clamp(valorLinear, 0.0001f, 1f);
         return Mathf.Log10(valorLinear) * 20;
+    }
+    public void TocarMusicaMesmo()
+    {
+        TocarMusica(fonteMusica.clip, fonteMusica.loop);
     }
 }
