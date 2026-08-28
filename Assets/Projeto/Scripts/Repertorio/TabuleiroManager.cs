@@ -471,8 +471,7 @@ public class TabuleiroManager : MonoBehaviour
 
     public void SimularFimTurnoInimigo()
     {
-        if (GerenciadorInterfaceTempo.Instancia != null) GerenciadorInterfaceTempo.Instancia.PararTemporizador();
-        ForçarLimpezaTurnoInimigo();
+        FinalizarTurnoInimigoCompleto();
     }
 
     private int TotalNosOcupados()

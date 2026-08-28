@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class RepertorioDados : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class RepertorioDados : MonoBehaviour
     public bool podeColetar = true;
     public GameObject notificação2;
     public GameObject quest;
+    [SerializeField] private string cenaQueLimpaRepertorio = "Estação 1"; // Nome da cena que limpa o repertório
+    [SerializeField] private string cenaQueLimpaRepertorio1 = "Estação";
 
     void Awake()
     {
@@ -24,6 +27,36 @@ public class RepertorioDados : MonoBehaviour
         else
         {
             Destroy(gameObject);
+        }
+    }
+
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += AoCarregarCena;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= AoCarregarCena;
+    }
+
+    private void AoCarregarCena(Scene cena, LoadSceneMode modo)
+    {
+        if (cena.name == cenaQueLimpaRepertorio || cena.name == cenaQueLimpaRepertorio1)
+        {
+            LimparRepertorio();
+        }
+    }
+
+    public void LimparRepertorio()
+    {
+        referenciasColetadas.Clear();
+        quantidadeReferenciasColetadas = 0;
+        podeColetar = true;
+
+        if (notificação2 != null)
+        {
+            notificação2.SetActive(false);
         }
     }
 

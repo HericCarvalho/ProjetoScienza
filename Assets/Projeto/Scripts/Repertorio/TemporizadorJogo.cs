@@ -5,7 +5,7 @@ public class TemporizadorJogo : MonoBehaviour
 {
     public static TemporizadorJogo Instancia { get; private set; }
 
-    [Header("Configurações de Tempo")]
+    [Header("Configuraï¿½ï¿½es de Tempo")]
     public float tempoPorTurno = 30f;
     private float tempoAtual;
     private bool cronometroAtivo = false;
@@ -48,7 +48,7 @@ public class TemporizadorJogo : MonoBehaviour
         cronometroAtivo = false;
     }
 
-    private void AtuaIizarVisualTemporizador() { } // Mantido oculto para focar na lógica
+    private void AtuaIizarVisualTemporizador() { } // Mantido oculto para focar na lï¿½gica
 
     private void AtualizarVisualTemporizador()
     {
@@ -61,10 +61,10 @@ public class TemporizadorJogo : MonoBehaviour
 
     private void TempoEsgotado()
     {
-        Debug.LogWarning("[TEMPO] Limpando peças do jogador e trocando turno.");
+        Debug.LogWarning("[TEMPO] Limpando peï¿½as do jogador e trocando turno.");
         if (TabuleiroManager.Instancia != null)
         {
-            TabuleiroManager.Instancia.ForçarDerrotaPorTempo();
+            TabuleiroManager.Instancia.ForÃ§arDerrotaPorTempo();
         }
     }
 }
