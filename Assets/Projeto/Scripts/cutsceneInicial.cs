@@ -7,6 +7,7 @@ public class cutsceneInicial : MonoBehaviour
     [SerializeField] private GameObject dialoguePanel;
     [SerializeField] private GameObject colisor;
     [SerializeField] private GameObject transformDaCutscene;
+    [SerializeField] private Animator animatorPorta;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -24,6 +25,7 @@ public class cutsceneInicial : MonoBehaviour
 
     System.Collections.IEnumerator SairDoTrem(float delay)
     {
+        animatorPorta.SetTrigger("Abrir");
         yield return new WaitForSeconds(delay);
         player.transform.position = Vector3.Lerp(player.transform.position, transformDaCutscene.transform.position, Time.fixedDeltaTime * 1f);
         StartCoroutine(Dialogo(2f));
