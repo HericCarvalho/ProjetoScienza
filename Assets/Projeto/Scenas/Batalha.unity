@@ -6657,7 +6657,7 @@ GameObject:
   - component: {fileID: 1426702579}
   - component: {fileID: 1426702581}
   m_Layer: 0
-  m_Name: "madu_bra\xE7o_baixo_0"
+  m_Name: Madu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7149,7 +7149,7 @@ GameObject:
   - component: {fileID: 1577043071}
   - component: {fileID: 1577043070}
   m_Layer: 0
-  m_Name: "caio_bra\xE7o_baixo_0"
+  m_Name: Caio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7416,6 +7416,12 @@ MonoBehaviour:
   textoNomeDaBarra: {fileID: 901376968}
   barraBarulhoJogador: {fileID: 1401072563}
   barraBarulhoAdversario: {fileID: 748074557}
+  caio: {fileID: 1577043070}
+  madu: {fileID: 1426702579}
+  caioNormal: {fileID: 8356662019757671175, guid: 60f720bbfeacea6439a318e2eeb84211, type: 3}
+  caioCantando: {fileID: 8465320022546664470, guid: c5d1330a932f95f448b157f3eae48911, type: 3}
+  maduNormal: {fileID: -2914881595879815756, guid: 56c0a507e75b2dd49a009f66a8948700, type: 3}
+  maduCantando: {fileID: -3931606593862441008, guid: 67d4453948aae6f40b26e020488917f7, type: 3}
   tempoMaximoTurno: 30
 --- !u!114 &1698302332
 MonoBehaviour:

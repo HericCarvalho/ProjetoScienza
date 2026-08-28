@@ -17,6 +17,14 @@ public class GerenciadorInterfaceTempo : MonoBehaviour
     public Image barraBarulhoJogador;
     public Image barraBarulhoAdversario;
 
+    [Header("Sprites dos Personagens")]
+    public SpriteRenderer caio;
+    public SpriteRenderer madu;
+    public Sprite caioNormal;
+    public Sprite caioCantando;
+    public Sprite maduNormal;
+    public Sprite maduCantando;
+
     [Header("Configura��es de Tempo")]
     public float tempoMaximoTurno = 30f;
     private float tempoAtual;
@@ -34,6 +42,7 @@ public class GerenciadorInterfaceTempo : MonoBehaviour
 
         if (barraBarulhoJogador != null) barraBarulhoJogador.fillAmount = 0f;
         if (barraBarulhoAdversario != null) barraBarulhoAdversario.fillAmount = 0f;
+        caio.sprite = caioCantando;
     }
 
     void Update()
@@ -106,10 +115,14 @@ public class GerenciadorInterfaceTempo : MonoBehaviour
         if (ehVezDoJogador)
         {
             textoIdentificadorTurno.text = $"{numeroTurno}�Turno - Sua vez";
+            caio.sprite = caioCantando;
+            madu.sprite = maduNormal;
         }
         else
         {
             textoIdentificadorTurno.text = $"{numeroTurno}�Turno - Vez da madu";
+            caio.sprite = caioNormal;
+            madu.sprite = maduCantando; 
         }
     }
 
